@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0b1020" />
+  <title>osu! AHR — Player Commands</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="page">
+    <section class="hero panel">
+      <div class="hero__copy">
+        <div class="topline">
+          <span class="badge">osu! auto host rotate</span>
+          <div class="lang-switch" aria-label="Language switch">
+            <button class="lang-btn is-active" data-lang-btn="ru" type="button">RU</button>
+            <button class="lang-btn" data-lang-btn="en" type="button">EN</button>
+          </div>
+        </div>
+
+        <h1 data-i18n="heroTitle">[N] | 4.5*-5.7* | Auto Host Rotate</h1>
+        <p class="lead" data-i18n="heroLead">
+          Быстрая и удобная памятка по командам для игроков. Нажимай на команду, чтобы скопировать её в буфер обмена.
+        </p>
+
+        <div class="hero__meta">
+          <span class="meta-pill" data-i18n="heroMeta1">Игровые команды</span>
+          <span class="meta-pill" data-i18n="heroMeta2">RU / EN</span>
+          <span class="meta-pill" data-i18n="heroMeta3">Click to copy</span>
+        </div>
+      </div>
+
+      <div class="hero__card">
+        <div class="hero__card-label" data-i18n="heroCardLabel">Как пользоваться</div>
+        <div class="hero__card-value" data-i18n="heroCardValue">1 клик = копия</div>
+        <p class="hero__card-text" data-i18n="heroCardText">
+          Выбирай нужную команду, нажимай на неё и вставляй в чат лобби.
+        </p>
+      </div>
+    </section>
+
+    <section class="grid" id="commands" aria-live="polite">
+      <article class="cmd panel" data-tags="queue очередь host очередь игроков" data-category="queue">
+        <div class="cmd__head">
+          <div class="cmd__text">
+            <h2 data-i18n="cmdQueueTitle">!queue</h2>
+            <p data-i18n="cmdQueueDesc">Показывает очередь игроков на хост-функцию.</p>
+          </div>
+        </div>
+        <button class="copy-btn copy-btn--single" type="button" data-copy="!queue">
+          <span class="copy-btn__cmd">!queue</span>
+        </button>
+      </article>
+
+      <article class="cmd panel" data-tags="start старт голосование матч timer таймер" data-category="match">
+        <div class="cmd__head">
+          <div class="cmd__text">
+            <h2 data-i18n="cmdStartTitle">!start | !start 10</h2>
+            <p data-i18n="cmdStartDesc">Запуск матча. Можно указать секунды для таймера или проголосовать за старт.</p>
+          </div>
+        </div>
+        <div class="copy-row">
+          <button class="copy-btn copy-btn--alias" type="button" data-copy="!start">
+            <span class="copy-btn__cmd">!start</span>
+          </button>
+          <button class="copy-btn copy-btn--alias" type="button" data-copy="!start 10">
+            <span class="copy-btn__cmd">!start 10</span>
+          </button>
+        </div>
+      </article>
+
+      <article class="cmd panel" data-tags="stop стоп таймер abort timer" data-category="match">
+        <div class="cmd__head">
+          <div class="cmd__text">
+            <h2 data-i18n="cmdStopTitle">!stop</h2>
+            <p data-i18n="cmdStopDesc">Останавливает таймер автоматического запуска матча.</p>
+          </div>
+        </div>
+        <button class="copy-btn copy-btn--single" type="button" data-copy="!stop">
+          <span class="copy-btn__cmd">!stop</span>
+        </button>
+      </article>
+
+      <article class="cmd panel" data-tags="abort отмена матч завис" data-category="match">
+        <div class="cmd__head">
+          <div class="cmd__text">
+            <h2 data-i18n="cmdAbortTitle">!abort</h2>
+            <p data-i18n="cmdAbortDesc">Принудительно прекращает матч, если он завис или не запускается.</p>
+          </div>
+        </div>
+        <button class="copy-btn copy-btn--single" type="button" data-copy="!abort">
+          <span class="copy-btn__cmd">!abort</span>
+        </button>
+      </article>
+
+      <article class="cmd panel" data-tags="skip пропуск очередь host" data-category="queue">
+        <div class="cmd__head">
+          <div class="cmd__text">
+            <h2 data-i18n="cmdSkipTitle">!skip</h2>
+            <p data-i18n="cmdSkipDesc">Пропускает твою очередь или голосует за передачу хоста следующему игроку.</p>
+          </div>
+        </div>
+        <button class="copy-btn copy-btn--single" type="button" data-copy="!skip">
+          <span class="copy-btn__cmd">!skip</span>
+        </button>
+      </article>
+
+      <article class="cmd panel" data-tags="playtime pt время lobby" data-category="info">
+        <div class="cmd__head">
+          <div class="cmd__text">
+            <h2 data-i18n="cmdPlaytimeTitle">!playtime | !pt</h2>
+            <p data-i18n="cmdPlaytimeDesc">Показывает, сколько времени ты находишься в лобби.</p>
+          </div>
+        </div>
+        <div class="copy-row">
+          <button class="copy-btn copy-btn--alias" type="button" data-copy="!playtime">
+            <span class="copy-btn__cmd">!playtime</span>
+          </button>
+          <button class="copy-btn copy-btn--alias" type="button" data-copy="!pt">
+            <span class="copy-btn__cmd">!pt</span>
+          </button>
+        </div>
+      </article>
+
+      <article class="cmd panel" data-tags="timeleft tl время матч" data-category="info">
+        <div class="cmd__head">
+          <div class="cmd__text">
+            <h2 data-i18n="cmdTimeleftTitle">!timeleft | !tl</h2>
+            <p data-i18n="cmdTimeleftDesc">Показывает, сколько времени осталось до завершения матча.</p>
+          </div>
+        </div>
+        <div class="copy-row">
+          <button class="copy-btn copy-btn--alias" type="button" data-copy="!timeleft">
+            <span class="copy-btn__cmd">!timeleft</span>
+          </button>
+          <button class="copy-btn copy-btn--alias" type="button" data-copy="!tl">
+            <span class="copy-btn__cmd">!tl</span>
+          </button>
+        </div>
+      </article>
+
+      <article class="cmd panel" data-tags="maptags mt теги карта user skill" data-category="info">
+        <div class="cmd__head">
+          <div class="cmd__text">
+            <h2 data-i18n="cmdMaptagsTitle">!maptags | !mt</h2>
+            <p data-i18n="cmdMaptagsDesc">Показывает user / skill теги карты.</p>
+          </div>
+        </div>
+        <div class="copy-row">
+          <button class="copy-btn copy-btn--alias" type="button" data-copy="!maptags">
+            <span class="copy-btn__cmd">!maptags</span>
+          </button>
+          <button class="copy-btn copy-btn--alias" type="button" data-copy="!mt">
+            <span class="copy-btn__cmd">!mt</span>
+          </button>
+        </div>
+      </article>
+
+      <article class="cmd panel" data-tags="lastscore ls прошлый результат score" data-category="info">
+        <div class="cmd__head">
+          <div class="cmd__text">
+            <h2 data-i18n="cmdLastscoreTitle">!lastscore | !ls</h2>
+            <p data-i18n="cmdLastscoreDesc">Показывает последний сыгранный результат внутри лобби.</p>
+          </div>
+        </div>
+        <div class="copy-row">
+          <button class="copy-btn copy-btn--alias" type="button" data-copy="!lastscore">
+            <span class="copy-btn__cmd">!lastscore</span>
+          </button>
+          <button class="copy-btn copy-btn--alias" type="button" data-copy="!ls">
+            <span class="copy-btn__cmd">!ls</span>
+          </button>
+        </div>
+      </article>
+
+      <article class="cmd panel" data-tags="bestscore bs лучший результат current map" data-category="info">
+        <div class="cmd__head">
+          <div class="cmd__text">
+            <h2 data-i18n="cmdBestscoreTitle">!bestscore | !bs</h2>
+            <p data-i18n="cmdBestscoreDesc">Показывает лучший скор на текущей карте.</p>
+          </div>
+        </div>
+        <div class="copy-row">
+          <button class="copy-btn copy-btn--alias" type="button" data-copy="!bestscore">
+            <span class="copy-btn__cmd">!bestscore</span>
+          </button>
+          <button class="copy-btn copy-btn--alias" type="button" data-copy="!bs">
+            <span class="copy-btn__cmd">!bs</span>
+          </button>
+        </div>
+      </article>
+
+      <article class="cmd panel" data-tags="nstats stats статистика account elo" data-category="info">
+        <div class="cmd__head">
+          <div class="cmd__text">
+            <h2 data-i18n="cmdNstatsTitle">!nstats</h2>
+            <p data-i18n="cmdNstatsDesc">Показывает статистику твоего аккаунта в рейтинговой системе лобби.</p>
+          </div>
+        </div>
+        <button class="copy-btn copy-btn--single" type="button" data-copy="!nstats">
+          <span class="copy-btn__cmd">!nstats</span>
+        </button>
+      </article>
+
+      <article class="cmd panel" data-tags="ntop top топ ranking lobby" data-category="info">
+        <div class="cmd__head">
+          <div class="cmd__text">
+            <h2 data-i18n="cmdNtopTitle">!ntop</h2>
+            <p data-i18n="cmdNtopDesc">Показывает топ игроков в рейтинговой системе лобби.</p>
+          </div>
+        </div>
+        <button class="copy-btn copy-btn--single" type="button" data-copy="!ntop">
+          <span class="copy-btn__cmd">!ntop</span>
+        </button>
+      </article>
+
+      <article class="cmd panel" data-tags="nhow how правило рейтинг lobby" data-category="info">
+        <div class="cmd__head">
+          <div class="cmd__text">
+            <h2 data-i18n="cmdNhowTitle">!nhow</h2>
+            <p data-i18n="cmdNhowDesc">Показывает, как работает рейтинговая система лобби.</p>
+          </div>
+        </div>
+        <button class="copy-btn copy-btn--single" type="button" data-copy="!nhow">
+          <span class="copy-btn__cmd">!nhow</span>
+        </button>
+      </article>
+    </section>
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite" aria-atomic="true"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
