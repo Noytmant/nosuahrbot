@@ -17,6 +17,10 @@
 
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
+
+@supports (overflow: clip) {
+  body { overflow-x: clip; }
+}
 body {
   margin: 0;
   min-height: 100vh;
@@ -28,6 +32,7 @@ body {
     radial-gradient(900px 700px at 50% 105%, rgba(156, 125, 255, 0.12), transparent 45%),
     linear-gradient(180deg, var(--bg0) 0%, var(--bg1) 45%, var(--bg2) 100%);
   overflow-x: hidden;
+  text-rendering: geometricPrecision;
 }
 body::before {
   content: "";
@@ -40,6 +45,8 @@ body::before {
   background-size: 44px 44px;
   opacity: 0.28;
   mask-image: radial-gradient(circle at center, black 30%, transparent 100%);
+  contain: paint;
+  transform: translateZ(0);
 }
 
 .page {
@@ -55,6 +62,8 @@ body::before {
   border: 1px solid var(--border);
   border-radius: var(--radius);
   box-shadow: var(--shadow);
+  contain: paint;
+  transform: translateZ(0);
 }
 
 .hero {
@@ -191,7 +200,10 @@ h1 {
   justify-content: space-between;
   position: relative;
   overflow: hidden;
-  transition: transform .24s ease, border-color .24s ease, box-shadow .24s ease, opacity .22s ease;
+  transition: transform .24s ease, border-color .24s ease, opacity .22s ease;
+  will-change: transform;
+  contain: layout paint style;
+  transform: translateZ(0);
 }
 .cmd::before {
   content: "";
@@ -243,8 +255,10 @@ h1 {
     rgba(255,255,255,0.05);
   border: 1px solid rgba(255,255,255,0.11);
   box-shadow: inset 0 1px 0 rgba(255,255,255,0.08);
-  transition: transform .18s ease, background .18s ease, border-color .18s ease, box-shadow .18s ease, filter .18s ease;
+  transition: transform .18s ease, background .18s ease, border-color .18s ease, filter .18s ease;
   min-height: 62px;
+  will-change: transform;
+  transform: translateZ(0);
 }
 .copy-btn::before {
   content: "";
@@ -314,16 +328,6 @@ h1 {
   font-size: 15px;
 }
 
-@keyframes pillPulse {
-  0%   { box-shadow: 0 0 0 0 rgba(96,215,255,0.00); }
-  50%  { box-shadow: 0 0 0 6px rgba(96,215,255,0.12); }
-  100% { box-shadow: 0 0 0 0 rgba(96,215,255,0.00); }
-}
-.copy-btn:hover,
-.copy-btn:focus-visible {
-  animation: pillPulse .9s ease-out infinite;
-}
-
 .toast {
   position: fixed;
   left: 50%;
@@ -339,6 +343,7 @@ h1 {
   border: 1px solid rgba(255,255,255,0.12);
   box-shadow: 0 16px 50px rgba(0,0,0,0.35);
   transition: opacity .2s ease, transform .2s ease;
+  will-change: opacity, transform;
 }
 .toast.is-show {
   opacity: 1;
@@ -376,5 +381,15 @@ h1 {
   }
   .copy-btn--alias {
     min-width: 0;
+  }
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }
