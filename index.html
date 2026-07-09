@@ -23,40 +23,72 @@
         </div>
 
         <h1 data-i18n="heroTitle">[N] | 4.5*-5.8* | Auto Host Rotate</h1>
-        <p class="lead" data-i18n="heroLead">
-          Быстрая и удобная памятка по командам для игроков. Нажимай на команду, чтобы скопировать её в буфер обмена.
-        </p>
+        <p class="lead" data-i18n="heroLead">Быстрая и удобная памятка по командам для игроков. Нажимай на команду, чтобы скопировать её в буфер обмена.</p>
 
         <div class="hero__meta">
           <span class="meta-pill" data-i18n="heroMeta1">Игровые команды</span>
           <span class="meta-pill" data-i18n="heroMeta2">RU / EN</span>
-          <span class="meta-pill" data-i18n="heroMeta3">Click to copy</span>
+          <span class="meta-pill" data-i18n="heroMeta3">Нажми, чтобы скопировать</span>
         </div>
       </div>
 
       <div class="hero__card">
         <div class="hero__card-label" data-i18n="heroCardLabel">Как пользоваться</div>
         <div class="hero__card-value" data-i18n="heroCardValue">1 клик = копия</div>
-        <p class="hero__card-text" data-i18n="heroCardText">
-          Выбирай нужную команду, нажимай на неё и вставляй в чат лобби.
-        </p>
+        <p class="hero__card-text" data-i18n="heroCardText">Выбирай нужную команду, нажимай на неё и вставляй в чат лобби.</p>
       </div>
     </section>
 
     <section class="grid" id="commands" aria-live="polite">
-      <article class="cmd panel" data-tags="queue очередь host очередь игроков" data-category="queue">
+      <div class="section-title" data-i18n="sectionMain">Основные команды</div>
+
+      <article class="cmd panel">
         <div class="cmd__head">
           <div class="cmd__text">
-            <h2 data-i18n="cmdQueueTitle">!queue</h2>
-            <p data-i18n="cmdQueueDesc">Показывает очередь игроков на хост-функцию.</p>
+            <h2 data-i18n="cmdNhelpTitle">!nhelp</h2>
+            <p data-i18n="cmdNhelpDesc">Показывает ссылку на сайт с описанием всех команд.</p>
           </div>
         </div>
-        <button class="copy-btn copy-btn--single" type="button" data-copy="!queue">
-          <span class="copy-btn__cmd">!queue</span>
+        <button class="copy-btn copy-btn--single" type="button" data-copy="!nhelp">
+          <span class="copy-btn__cmd">!nhelp</span>
         </button>
       </article>
 
-      <article class="cmd panel" data-tags="start старт голосование матч timer таймер" data-category="match">
+      <article class="cmd panel">
+        <div class="cmd__head">
+          <div class="cmd__text">
+            <h2 data-i18n="cmdQueueTitle">!queue | !q</h2>
+            <p data-i18n="cmdQueueDesc">Показывает текущую очередь хоста.</p>
+          </div>
+        </div>
+        <div class="copy-row">
+          <button class="copy-btn copy-btn--alias" type="button" data-copy="!queue">
+            <span class="copy-btn__cmd">!queue</span>
+          </button>
+          <button class="copy-btn copy-btn--alias" type="button" data-copy="!q">
+            <span class="copy-btn__cmd">!q</span>
+          </button>
+        </div>
+      </article>
+
+      <article class="cmd panel">
+        <div class="cmd__head">
+          <div class="cmd__text">
+            <h2 data-i18n="cmdQueuePositionTitle">!queueposition | !qp</h2>
+            <p data-i18n="cmdQueuePositionDesc">Показывает твою позицию в очереди.</p>
+          </div>
+        </div>
+        <div class="copy-row">
+          <button class="copy-btn copy-btn--alias" type="button" data-copy="!queueposition">
+            <span class="copy-btn__cmd">!queueposition</span>
+          </button>
+          <button class="copy-btn copy-btn--alias" type="button" data-copy="!qp">
+            <span class="copy-btn__cmd">!qp</span>
+          </button>
+        </div>
+      </article>
+
+      <article class="cmd panel">
         <div class="cmd__head">
           <div class="cmd__text">
             <h2 data-i18n="cmdStartTitle">!start | !start 10</h2>
@@ -73,7 +105,7 @@
         </div>
       </article>
 
-      <article class="cmd panel" data-tags="stop стоп таймер abort timer" data-category="match">
+      <article class="cmd panel">
         <div class="cmd__head">
           <div class="cmd__text">
             <h2 data-i18n="cmdStopTitle">!stop</h2>
@@ -85,7 +117,7 @@
         </button>
       </article>
 
-      <article class="cmd panel" data-tags="abort отмена матч завис" data-category="match">
+      <article class="cmd panel">
         <div class="cmd__head">
           <div class="cmd__text">
             <h2 data-i18n="cmdAbortTitle">!abort</h2>
@@ -97,7 +129,7 @@
         </button>
       </article>
 
-      <article class="cmd panel" data-tags="skip пропуск очередь host" data-category="queue">
+      <article class="cmd panel">
         <div class="cmd__head">
           <div class="cmd__text">
             <h2 data-i18n="cmdSkipTitle">!skip</h2>
@@ -109,11 +141,25 @@
         </button>
       </article>
 
-      <article class="cmd panel" data-tags="playtime pt время lobby" data-category="info">
+      <article class="cmd panel">
+        <div class="cmd__head">
+          <div class="cmd__text">
+            <h2 data-i18n="cmdAutoskipTitle">!autoskip</h2>
+            <p data-i18n="cmdAutoskipDesc">Включает или выключает автоматический пропуск твоей очереди.</p>
+          </div>
+        </div>
+        <button class="copy-btn copy-btn--single" type="button" data-copy="!autoskip">
+          <span class="copy-btn__cmd">!autoskip</span>
+        </button>
+      </article>
+
+      <div class="section-title" data-i18n="sectionInfo">Информация</div>
+
+      <article class="cmd panel">
         <div class="cmd__head">
           <div class="cmd__text">
             <h2 data-i18n="cmdPlaytimeTitle">!playtime | !pt</h2>
-            <p data-i18n="cmdPlaytimeDesc">Показывает, сколько времени ты находишься в лобби.</p>
+            <p data-i18n="cmdPlaytimeDesc">Показывает текущее и общее время нахождения в лобби.</p>
           </div>
         </div>
         <div class="copy-row">
@@ -126,7 +172,7 @@
         </div>
       </article>
 
-      <article class="cmd panel" data-tags="timeleft tl время матч" data-category="info">
+      <article class="cmd panel">
         <div class="cmd__head">
           <div class="cmd__text">
             <h2 data-i18n="cmdTimeleftTitle">!timeleft | !tl</h2>
@@ -143,7 +189,7 @@
         </div>
       </article>
 
-      <article class="cmd panel" data-tags="maptags mt теги карта user skill" data-category="info">
+      <article class="cmd panel">
         <div class="cmd__head">
           <div class="cmd__text">
             <h2 data-i18n="cmdMaptagsTitle">!maptags | !mt</h2>
@@ -160,7 +206,9 @@
         </div>
       </article>
 
-      <article class="cmd panel" data-tags="lastscore ls прошлый результат score" data-category="info">
+      <div class="section-title" data-i18n="sectionScores">Результаты</div>
+
+      <article class="cmd panel">
         <div class="cmd__head">
           <div class="cmd__text">
             <h2 data-i18n="cmdLastscoreTitle">!lastscore | !ls</h2>
@@ -177,7 +225,7 @@
         </div>
       </article>
 
-      <article class="cmd panel" data-tags="bestscore bs лучший результат current map" data-category="info">
+      <article class="cmd panel">
         <div class="cmd__head">
           <div class="cmd__text">
             <h2 data-i18n="cmdBestscoreTitle">!bestscore | !bs</h2>
@@ -194,40 +242,57 @@
         </div>
       </article>
 
-      <article class="cmd panel" data-tags="nstats stats статистика account elo" data-category="info">
+      <div class="section-title" data-i18n="sectionRank">Рейтинговая система</div>
+
+      <article class="cmd panel">
         <div class="cmd__head">
           <div class="cmd__text">
-            <h2 data-i18n="cmdNstatsTitle">!nstats</h2>
-            <p data-i18n="cmdNstatsDesc">Показывает статистику твоего аккаунта в рейтинговой системе лобби.</p>
+            <h2 data-i18n="cmdNstatsTitle">!nstats | !ns</h2>
+            <p data-i18n="cmdNstatsDesc">Показывает твою статистику: Rank, ELO, LWS, Matches и Win Rate.</p>
           </div>
         </div>
-        <button class="copy-btn copy-btn--single" type="button" data-copy="!nstats">
-          <span class="copy-btn__cmd">!nstats</span>
-        </button>
+        <div class="copy-row">
+          <button class="copy-btn copy-btn--alias" type="button" data-copy="!nstats">
+            <span class="copy-btn__cmd">!nstats</span>
+          </button>
+          <button class="copy-btn copy-btn--alias" type="button" data-copy="!ns">
+            <span class="copy-btn__cmd">!ns</span>
+          </button>
+        </div>
       </article>
 
-      <article class="cmd panel" data-tags="ntop top топ ranking lobby" data-category="info">
+      <article class="cmd panel">
         <div class="cmd__head">
           <div class="cmd__text">
-            <h2 data-i18n="cmdNtopTitle">!ntop</h2>
+            <h2 data-i18n="cmdNtopTitle">!ntop | !nt</h2>
             <p data-i18n="cmdNtopDesc">Показывает топ игроков в рейтинговой системе лобби.</p>
           </div>
         </div>
-        <button class="copy-btn copy-btn--single" type="button" data-copy="!ntop">
-          <span class="copy-btn__cmd">!ntop</span>
-        </button>
+        <div class="copy-row">
+          <button class="copy-btn copy-btn--alias" type="button" data-copy="!ntop">
+            <span class="copy-btn__cmd">!ntop</span>
+          </button>
+          <button class="copy-btn copy-btn--alias" type="button" data-copy="!nt">
+            <span class="copy-btn__cmd">!nt</span>
+          </button>
+        </div>
       </article>
 
-      <article class="cmd panel" data-tags="nhow how правило рейтинг lobby" data-category="info">
+      <article class="cmd panel">
         <div class="cmd__head">
           <div class="cmd__text">
-            <h2 data-i18n="cmdNhowTitle">!nhow</h2>
+            <h2 data-i18n="cmdNhowTitle">!nhow | !nh</h2>
             <p data-i18n="cmdNhowDesc">Показывает, как работает рейтинговая система лобби.</p>
           </div>
         </div>
-        <button class="copy-btn copy-btn--single" type="button" data-copy="!nhow">
-          <span class="copy-btn__cmd">!nhow</span>
-        </button>
+        <div class="copy-row">
+          <button class="copy-btn copy-btn--alias" type="button" data-copy="!nhow">
+            <span class="copy-btn__cmd">!nhow</span>
+          </button>
+          <button class="copy-btn copy-btn--alias" type="button" data-copy="!nh">
+            <span class="copy-btn__cmd">!nh</span>
+          </button>
+        </div>
       </article>
     </section>
   </main>
