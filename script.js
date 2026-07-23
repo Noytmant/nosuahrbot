@@ -4,7 +4,7 @@ const toast = document.getElementById('toast');
 
 const translations = {
   "ru": {
-    "heroTitle": "[N] | 4.5*-6.0* | Auto Host Rotate",
+    "heroTitle": "[N] | 4.5*-6.3* | Auto Host Rotate",
     "heroLead": "Быстрая и удобная памятка по командам для игроков. Нажимай на команду, чтобы скопировать её в буфер обмена.",
     "heroMeta1": "Игровые команды",
     "heroMeta2": "RU / EN",
@@ -51,7 +51,7 @@ const translations = {
     "cmdNhowDesc": "Показывает, как работает рейтинговая система лобби."
   },
   "en": {
-    "heroTitle": "[N] | 4.5*-6.0* | Auto Host Rotate",
+    "heroTitle": "[N] | 4.5*-6.3* | Auto Host Rotate",
     "heroLead": "A quick and clean command guide for players. Click any command to copy it to your clipboard.",
     "heroMeta1": "Player commands",
     "heroMeta2": "RU / EN",
