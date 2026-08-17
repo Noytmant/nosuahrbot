@@ -22,7 +22,7 @@
           </div>
         </div>
 
-        <h1 data-i18n="heroTitle">[N] | 4.5*-6.3* | Auto Host Rotate</h1>
+        <h1 data-i18n="heroTitle">[N] | 4.5* - 6.3* | S1 | !nhelp</h1>
         <p class="lead" data-i18n="heroLead">Быстрая и удобная памятка по командам для игроков. Нажимай на команду, чтобы скопировать её в буфер обмена.</p>
 
         <div class="hero__meta">
@@ -45,13 +45,18 @@
       <article class="cmd panel">
         <div class="cmd__head">
           <div class="cmd__text">
-            <h2 data-i18n="cmdNhelpTitle">!nhelp</h2>
+            <h2 data-i18n="cmdNhelpTitle">!nhelp | !info</h2>
             <p data-i18n="cmdNhelpDesc">Показывает ссылку на сайт с описанием всех команд.</p>
           </div>
         </div>
-        <button class="copy-btn copy-btn--single" type="button" data-copy="!nhelp">
-          <span class="copy-btn__cmd">!nhelp</span>
-        </button>
+        <div class="copy-row">
+          <button class="copy-btn copy-btn--alias" type="button" data-copy="!nhelp">
+            <span class="copy-btn__cmd">!nhelp</span>
+          </button>
+          <button class="copy-btn copy-btn--alias" type="button" data-copy="!info">
+            <span class="copy-btn__cmd">!info</span>
+          </button>
+        </div>
       </article>
 
       <article class="cmd panel">
@@ -175,6 +180,23 @@
       <article class="cmd panel">
         <div class="cmd__head">
           <div class="cmd__text">
+            <h2 data-i18n="cmdMirrorsTitle">!mirrors | !mr</h2>
+            <p data-i18n="cmdMirrorsDesc">Показывает альтернативные ссылки для скачивания текущей карты.</p>
+          </div>
+        </div>
+        <div class="copy-row">
+          <button class="copy-btn copy-btn--alias" type="button" data-copy="!mirrors">
+            <span class="copy-btn__cmd">!mirrors</span>
+          </button>
+          <button class="copy-btn copy-btn--alias" type="button" data-copy="!mr">
+            <span class="copy-btn__cmd">!mr</span>
+          </button>
+        </div>
+      </article>
+
+      <article class="cmd panel">
+        <div class="cmd__head">
+          <div class="cmd__text">
             <h2 data-i18n="cmdTimeleftTitle">!timeleft | !tl</h2>
             <p data-i18n="cmdTimeleftDesc">Показывает, сколько времени осталось до завершения матча.</p>
           </div>
@@ -248,7 +270,7 @@
         <div class="cmd__head">
           <div class="cmd__text">
             <h2 data-i18n="cmdNstatsTitle">!nstats | !ns</h2>
-            <p data-i18n="cmdNstatsDesc">Показывает твою статистику: Rank, ELO, LWS, Matches и Win Rate.</p>
+            <p data-i18n="cmdNstatsDesc">Показывает Rank, ELO, последний ELO, лучшую серию побед, матчи, Win Rate и среднюю точность.</p>
           </div>
         </div>
         <div class="copy-row">
@@ -294,6 +316,60 @@
           </button>
         </div>
       </article>
+
+      <div class="section-title" data-i18n="sectionSeason">Сезонный рейтинг S1</div>
+
+      <article class="cmd panel">
+        <div class="cmd__head">
+          <div class="cmd__text">
+            <h2 data-i18n="cmdNsstatsTitle">!nsstats | !nss</h2>
+            <p data-i18n="cmdNsstatsDesc">Показывает только твой Season rank, ELO и последний полученный ELO в текущем сезоне.</p>
+          </div>
+        </div>
+        <div class="copy-row">
+          <button class="copy-btn copy-btn--alias" type="button" data-copy="!nsstats">
+            <span class="copy-btn__cmd">!nsstats</span>
+          </button>
+          <button class="copy-btn copy-btn--alias" type="button" data-copy="!nss">
+            <span class="copy-btn__cmd">!nss</span>
+          </button>
+        </div>
+      </article>
+
+      <article class="cmd panel">
+        <div class="cmd__head">
+          <div class="cmd__text">
+            <h2 data-i18n="cmdNstopTitle">!nstop | !nst</h2>
+            <p data-i18n="cmdNstopDesc">Показывает пять лучших игроков текущего сезона.</p>
+          </div>
+        </div>
+        <div class="copy-row">
+          <button class="copy-btn copy-btn--alias" type="button" data-copy="!nstop">
+            <span class="copy-btn__cmd">!nstop</span>
+          </button>
+          <button class="copy-btn copy-btn--alias" type="button" data-copy="!nst">
+            <span class="copy-btn__cmd">!nst</span>
+          </button>
+        </div>
+      </article>
+
+      <article class="cmd panel">
+        <div class="cmd__head">
+          <div class="cmd__text">
+            <h2 data-i18n="cmdNshowTitle">!nshow | !nsh</h2>
+            <p data-i18n="cmdNshowDesc">Объясняет сезонные правила, призы топ-5 и проверку двух лучших результатов.</p>
+          </div>
+        </div>
+        <div class="copy-row">
+          <button class="copy-btn copy-btn--alias" type="button" data-copy="!nshow">
+            <span class="copy-btn__cmd">!nshow</span>
+          </button>
+          <button class="copy-btn copy-btn--alias" type="button" data-copy="!nsh">
+            <span class="copy-btn__cmd">!nsh</span>
+          </button>
+        </div>
+      </article>
+
     </section>
   </main>
 
