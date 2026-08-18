@@ -24,11 +24,11 @@ const translations = {
     "permanentFooter": "Статистика: ELO, Last ELO, серии, матчи, Win Rate и средняя accuracy",
     "seasonType": "1 месяц",
     "seasonTitle": "Сезонный рейтинг",
-    "seasonSummary": "Каждый матч даёт сумму пяти компонентов. Через месяц сезон архивируется, а новый начинается с нуля.",
+    "seasonSummary": "Сезонный ELO складывается из результатов матчей, времени и активного участия в ивентах. Через месяц сезон архивируется, а новый начинается с нуля.",
     "seasonRule1Title": "Место по скору",
     "seasonRule1Text": "От +N за 1 место до +1 за последнее",
     "seasonRule2Title": "Бонусы ивентов",
-    "seasonRule2Text": "+N от объявленного ивента",
+    "seasonRule2Text": "+1 за первую допустимую попытку в Math, Guess Number или Fast Typing. В TeamVs объявленный +N получает только победившая команда",
     "seasonRule3Title": "Аккуратность",
     "seasonRule3Text": "От +N за высшую точность из игроков до +1 за низкую",
     "seasonRule4Title": "Позиция в матче",
@@ -76,15 +76,11 @@ const translations = {
     "cmdNstatsDesc": "Показывает Rank, ELO, последний ELO, лучшую серию побед, матчи, Win Rate и среднюю точность.",
     "cmdNtopTitle": "!ntop | !nt",
     "cmdNtopDesc": "Показывает топ игроков в рейтинговой системе лобби.",
-    "cmdNhowTitle": "!nhow | !nh",
-    "cmdNhowDesc": "Показывает, как работает постоянная рейтинговая система лобби.",
     "sectionSeason": "Сезонный рейтинг S1",
     "cmdNsstatsTitle": "!nsstats | !nss",
     "cmdNsstatsDesc": "Показывает только твой Season rank, ELO и последний полученный ELO в текущем сезоне.",
     "cmdNstopTitle": "!nstop | !nst",
-    "cmdNstopDesc": "Показывает пять лучших игроков текущего сезона.",
-    "cmdNshowTitle": "!nshow | !nsh",
-    "cmdNshowDesc": "Объясняет сезонные правила, призы топ-5 и проверку двух лучших результатов."
+    "cmdNstopDesc": "Показывает пять лучших игроков текущего сезона."
   },
   "en": {
     "heroTitle": "[N] | 4.5* - 6.3* | S1 | !nhelp",
@@ -107,11 +103,11 @@ const translations = {
     "permanentFooter": "Stats: ELO, Last ELO, streaks, matches, Win Rate, and average accuracy",
     "seasonType": "1 month",
     "seasonTitle": "Season ranking",
-    "seasonSummary": "Each match awards the sum of five components. After one month the season is archived and a new one starts from zero.",
+    "seasonSummary": "Season ELO combines match results, playtime, and active event participation. After one month the season is archived and a new one starts from zero.",
     "seasonRule1Title": "Score placement",
     "seasonRule1Text": "From +N for 1st place down to +1 for last place",
     "seasonRule2Title": "Event bonuses",
-    "seasonRule2Text": "+N from the announced event",
+    "seasonRule2Text": "+1 for the first valid attempt in Math, Guess Number, or Fast Typing. In TeamVs, only the winning team receives the announced +N",
     "seasonRule3Title": "Accuracy",
     "seasonRule3Text": "From +N for the highest accuracy among players down to +1 for the lowest",
     "seasonRule4Title": "Match position",
@@ -159,15 +155,11 @@ const translations = {
     "cmdNstatsDesc": "Shows Rank, ELO, Last ELO, longest win streak, matches, win rate, and average accuracy.",
     "cmdNtopTitle": "!ntop | !nt",
     "cmdNtopDesc": "Shows the top players in the lobby ranking system.",
-    "cmdNhowTitle": "!nhow | !nh",
-    "cmdNhowDesc": "Explains how the permanent lobby ranking works.",
     "sectionSeason": "Season ranking S1",
     "cmdNsstatsTitle": "!nsstats | !nss",
     "cmdNsstatsDesc": "Shows only your Season rank, ELO, and Last ELO for the current season.",
     "cmdNstopTitle": "!nstop | !nst",
-    "cmdNstopDesc": "Shows the current season's top five players.",
-    "cmdNshowTitle": "!nshow | !nsh",
-    "cmdNshowDesc": "Explains the season rules, top-five prizes, and two-best-score profile check."
+    "cmdNstopDesc": "Shows the current season's top five players."
   }
 };
 
