@@ -205,10 +205,6 @@ h1 {
 }
 .ranking-guide__header {
   position: relative;
-  display: grid;
-  grid-template-columns: minmax(0, .8fr) minmax(320px, 1.2fr);
-  align-items: end;
-  gap: 24px;
   margin-bottom: 20px;
 }
 .ranking-guide__eyebrow {
@@ -223,12 +219,6 @@ h1 {
   font-size: clamp(24px, 3.2vw, 40px);
   line-height: 1.05;
   letter-spacing: -.045em;
-}
-.ranking-guide__header > p {
-  margin: 0;
-  color: var(--muted);
-  font-size: 15px;
-  line-height: 1.65;
 }
 .ranking-guide__grid {
   position: relative;
@@ -358,6 +348,9 @@ h1 {
   background: rgba(96,215,255,.06);
   font-size: 12.5px;
   line-height: 1.5;
+}
+.rank-guide--season .rank-guide__footer {
+  background: rgba(255,102,170,.07);
 }
 .season-prize {
   display: flex;

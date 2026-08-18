@@ -45,7 +45,6 @@
           <span class="ranking-guide__eyebrow" data-i18n="rankingEyebrow">Два независимых рейтинга</span>
           <h2 id="rankingGuideTitle" data-i18n="rankingTitle">Как начисляется ELO</h2>
         </div>
-        <p data-i18n="rankingLead">Постоянный рейтинг хранит всю историю, а сезонный обнуляется каждый месяц и определяет победителей сезона.</p>
       </div>
 
       <div class="ranking-guide__grid">
@@ -58,17 +57,17 @@
           <p class="rank-guide__summary" data-i18n="permanentSummary">Это твоя долгосрочная история в лобби. Она не сбрасывается при смене сезона.</p>
 
           <div class="rank-rule">
-            <span class="rank-rule__number">01</span>
+            <span class="rank-rule__number">1</span>
             <div>
               <strong data-i18n="permanentRule1Title">Место по скору</strong>
-              <p data-i18n="permanentRule1Text">При N игроках первое место получает +N ELO, а последнее +1. Одинаковый скор даёт одинаковое место и ELO.</p>
+              <p data-i18n="permanentRule1Text">От +N за 1 место до +1 за последнее</p>
             </div>
           </div>
           <div class="rank-rule">
-            <span class="rank-rule__number">02</span>
+            <span class="rank-rule__number">2</span>
             <div>
-              <strong data-i18n="permanentRule2Title">Отдельные бонусы ивентов</strong>
-              <p data-i18n="permanentRule2Text">Если ивент заранее объявил бонус постоянного ELO, он добавляется отдельно.</p>
+              <strong data-i18n="permanentRule2Title">Бонусы ивентов</strong>
+              <p data-i18n="permanentRule2Text">+N от объявленного ивента</p>
             </div>
           </div>
 
@@ -87,24 +86,24 @@
 
           <div class="season-formula">
             <div class="rank-rule">
-              <span class="rank-rule__number">01</span>
-              <div><strong data-i18n="seasonRule1Title">Место по скору</strong><p data-i18n="seasonRule1Text">От +N за 1-е место до +1 за последнее.</p></div>
+              <span class="rank-rule__number">1</span>
+              <div><strong data-i18n="seasonRule1Title">Место по скору</strong><p data-i18n="seasonRule1Text">От +N за 1 место до +1 за последнее</p></div>
             </div>
             <div class="rank-rule">
-              <span class="rank-rule__number">02</span>
-              <div><strong data-i18n="seasonRule2Title">Место по accuracy</strong><p data-i18n="seasonRule2Text">Ещё одна таблица N..1, но уже по точности.</p></div>
+              <span class="rank-rule__number">2</span>
+              <div><strong data-i18n="seasonRule2Title">Бонусы ивентов</strong><p data-i18n="seasonRule2Text">+N от объявленного ивента</p></div>
             </div>
             <div class="rank-rule">
-              <span class="rank-rule__number">03</span>
-              <div><strong data-i18n="seasonRule3Title">Прогресс места</strong><p data-i18n="seasonRule3Text">Лучше прошлого матча: +1. Хуже: −1. Так же: 0. Доли сравниваются честно: 3/5 = 2/3.</p></div>
+              <span class="rank-rule__number">3</span>
+              <div><strong data-i18n="seasonRule3Title">Аккуратность</strong><p data-i18n="seasonRule3Text">От +N за высшую точность из игроков до +1 за низкую</p></div>
             </div>
             <div class="rank-rule">
-              <span class="rank-rule__number">04</span>
-              <div><strong data-i18n="seasonRule4Title">Время в игре</strong><p data-i18n="seasonRule4Text">Каждые накопленные 5 минут завершённых матчей: +1 ELO.</p></div>
+              <span class="rank-rule__number">4</span>
+              <div><strong data-i18n="seasonRule4Title">Позиция в матче</strong><p data-i18n="seasonRule4Text">Повышай свою позицию в матче, чтобы получить +2, в противном случае -2. Удержание позиции даёт +1</p></div>
             </div>
             <div class="rank-rule">
-              <span class="rank-rule__number">05</span>
-              <div><strong data-i18n="seasonRule5Title">Участие в ивенте</strong><p data-i18n="seasonRule5Text">Результат в объявленном ивент-матче: +1 ELO.</p></div>
+              <span class="rank-rule__number">5</span>
+              <div><strong data-i18n="seasonRule5Title">Время в игре</strong><p data-i18n="seasonRule5Text">Получай +1 за каждые 5 минут проведенные в матчах этого лобби</p></div>
             </div>
           </div>
 
@@ -112,7 +111,10 @@
             <strong data-i18n="seasonPrizeTitle">😎 Топ 5 получают osu!supporter</strong>
             <span data-i18n="seasonPrizeText">По 1 месяцу в конце сезона.</span>
           </div>
-          <p class="eligibility-note" data-i18n="seasonEligibility">Для допуска бот проверяет 2 лучших osu!standard результа. Результат на карте 6.70★ или выше исключает только из сезона — постоянный рейтинг остаётся доступен.</p>
+          <p class="eligibility-note" data-i18n="seasonEligibility">Для допуска бот проверяет 2 лучших osu!standard результата. Результат на карте 6.70 или выше исключает вас только из сезона, ввиду баланса игроков по установленному максимальному ограничению SR. Постоянный рейтинг остаётся доступным.</p>
+          <div class="rank-guide__footer">
+            <span data-i18n="seasonFooter">Статистика: Season Rank, ELO и Last ELO</span>
+          </div>
         </article>
       </div>
     </section>
