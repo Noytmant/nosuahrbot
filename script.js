@@ -1,165 +1,131 @@
-const cards = Array.from(document.querySelectorAll('.ranking-guide, .cmd'));
+const cards = Array.from(document.querySelectorAll('.ranking-guide, .notice-card, .cmd'));
 const langBtns = Array.from(document.querySelectorAll('[data-lang-btn]'));
 const toast = document.getElementById('toast');
 
 const translations = {
   "ru": {
-    "heroTitle": "[N] | 4.5* - 6.3* | AHR | S1",
-    "heroLead": "Быстрая и удобная памятка по командам для игроков. Нажимай на команду, чтобы скопировать её в буфер обмена.",
-    "heroMeta1": "Игровые команды",
-    "heroMeta2": "RU / EN",
-    "heroMeta3": "Нажми, чтобы скопировать",
-    "heroCardLabel": "Как пользоваться",
-    "heroCardValue": "1 клик = копия",
-    "heroCardText": "Выбирай нужную команду, нажимай на неё и вставляй в чат лобби.",
-    "rankingEyebrow": "Два независимых рейтинга",
+    "heroTitle": "[N] | 4.5* - 6.3* | AHR",
+    "heroLead": "Актуальные команды лобби, правила постоянного и сезонного ELO и награды. Нажми на команду, чтобы скопировать её.",
+    "heroMeta1": "Host rotation",
+    "heroMeta2": "Permanent + Seasonal ELO",
+    "heroMeta3": "Top 5 rewards",
+    "heroCardLabel": "Главный приз сезона",
+    "heroCardText": "Топ-5 сезонного рейтинга получают по 1 месяцу osu!supporter в конце сезона.",
+    "rankingEyebrow": "Актуальная формула из бота",
     "rankingTitle": "Как начисляется ELO",
-    "permanentType": "Без вайпов",
-    "permanentTitle": "Постоянный рейтинг",
-    "permanentSummary": "Это твоя долгосрочная история в лобби. Она не сбрасывается при смене сезона.",
-    "permanentRule1Title": "Место по скору",
-    "permanentRule1Text": "От +N за 1 место до +1 за последнее",
-    "permanentRule2Title": "Бонусы ивентов",
-    "permanentRule2Text": "+N от объявленного ивента",
-    "permanentFooter": "Статистика: ELO, Last ELO, серии, матчи, Win Rate и средняя accuracy",
+    "permanentType": "Постоянный",
+    "permanentTitle": "Обычный рейтинг",
+    "permanentSummary": "Начисляется после матчей минимум с двумя игроками и не сбрасывается между сезонами.",
+    "permanentRule1Title": "Место по score",
+    "permanentRule1Text": "При N игроках: 1 место +N ELO, 2 место +(N−1), последнее +1.",
+    "permanentRule2Title": "Только результат матча",
+    "permanentRule2Text": "Accuracy и combo сохраняются в статистике, но не добавляют отдельные очки в постоянный ELO.",
+    "permanentFooter": "Команды: !ns — твоя статистика, !nt — топ-5 постоянного рейтинга.",
     "seasonType": "30 дней",
     "seasonTitle": "Сезонный рейтинг",
-    "seasonSummary": "Сезонный ELO складывается из результатов матчей, времени и активного участия в ивентах. Через 30 дней сезон архивируется, а новый начинается с нуля.",
-    "seasonRule1Title": "Место по скору",
-    "seasonRule1Text": "От +N за 1 место до +1 за последнее",
-    "seasonRule2Title": "Бонусы ивентов",
-    "seasonRule2Text": "+1 за первую допустимую попытку в Math, Guess Number или Fast Typing. В TeamVs объявленный +N получает только победившая команда",
-    "seasonRule3Title": "Аккуратность",
-    "seasonRule3Text": "От +N за высшую точность из игроков до +1 за низкую",
-    "seasonRule4Title": "Позиция в матче",
-    "seasonRule4Text": "Повышай свою позицию в матче, чтобы получить +2, в противном случае -2. Удержание позиции даёт +1",
-    "seasonRule5Title": "Время в игре",
-    "seasonRule5Text": "Получай +1 за каждые 5 минут проведенные в матчах этого лобби",
-    "seasonPrizeTitle": "😎 Топ 5 получают osu!supporter",
-    "seasonPrizeText": "По 1 месяцу в конце сезона.",
-    "seasonEligibility": "Для допуска бот проверяет 2 лучших osu!standard результата. Результат на карте 6.80 или выше исключает вас только из сезона, ввиду баланса игроков по установленному максимальному ограничению SR. Постоянный рейтинг остаётся доступным.",
-    "seasonFooter": "Статистика: Season Rank, ELO и Last ELO",
-    "copied": "Скопировано: {cmd}",
-    "sectionMain": "Основные команды",
-    "cmdNhelpTitle": "!nhelp | !info",
-    "cmdNhelpDesc": "Показывает ссылку на сайт с описанием всех команд.",
-    "cmdQueueTitle": "!queue | !q",
-    "cmdQueueDesc": "Показывает текущую очередь хоста.",
-    "cmdQueuePositionTitle": "!queueposition | !qp",
-    "cmdQueuePositionDesc": "Показывает твою позицию в очереди.",
-    "cmdStartTitle": "!start | !start 10",
-    "cmdStartDesc": "Запуск матча. Можно указать секунды для таймера или проголосовать за старт.",
-    "cmdStopTitle": "!stop",
-    "cmdStopDesc": "Останавливает таймер автоматического запуска матча.",
-    "cmdAbortTitle": "!abort",
-    "cmdAbortDesc": "Принудительно прекращает матч, если он завис или не запускается.",
-    "cmdSkipTitle": "!skip",
-    "cmdSkipDesc": "Пропускает твою очередь или голосует за передачу хоста следующему игроку.",
-    "cmdAutoskipTitle": "!autoskip",
-    "cmdAutoskipDesc": "Включает или выключает автоматический пропуск твоей очереди.",
-    "sectionInfo": "Информация",
-    "cmdPlaytimeTitle": "!playtime | !pt",
-    "cmdPlaytimeDesc": "Показывает текущее и общее время нахождения в лобби.",
-    "cmdMirrorsTitle": "!mirrors | !mr",
-    "cmdMirrorsDesc": "Показывает альтернативные ссылки для скачивания текущей карты.",
-    "cmdTimeleftTitle": "!timeleft | !tl",
-    "cmdTimeleftDesc": "Показывает, сколько времени осталось до завершения матча.",
-    "cmdMaptagsTitle": "!maptags | !mt",
-    "cmdMaptagsDesc": "Показывает user / skill теги карты.",
-    "sectionScores": "Результаты",
-    "cmdLastscoreTitle": "!lastscore | !ls",
-    "cmdLastscoreDesc": "Показывает последний скор, сыгранный внутри лобби.",
-    "cmdBestscoreTitle": "!bestscore | !bs",
-    "cmdBestscoreDesc": "Показывает лучший скор на текущей карте.",
-    "sectionRank": "Рейтинговая система",
-    "cmdNstatsTitle": "!nstats | !ns",
-    "cmdNstatsDesc": "Показывает Rank, ELO, последний ELO, лучшую серию побед, матчи, Win Rate и среднюю точность.",
-    "cmdNtopTitle": "!ntop | !nt",
-    "cmdNtopDesc": "Показывает топ игроков в рейтинговой системе лобби.",
-    "sectionSeason": "Сезонный рейтинг S1",
-    "cmdNsstatsTitle": "!nsstats | !nss",
-    "cmdNsstatsDesc": "Показывает только твой Season rank, ELO и последний полученный ELO в текущем сезоне.",
-    "cmdNstopTitle": "!nstop | !nst",
-    "cmdNstopDesc": "Показывает пять лучших игроков текущего сезона."
+    "seasonSummary": "Сезон идёт 30 дней. После завершения таблица архивируется, а новый сезон начинается с нуля.",
+    "seasonRule1Title": "Score",
+    "seasonRule1Text": "От +N за 1 место до +1 за последнее.",
+    "seasonRule2Title": "Accuracy",
+    "seasonRule2Text": "От +N за лучшую accuracy до +1 за худшую.",
+    "seasonRule3Title": "Combo",
+    "seasonRule3Text": "От +N за лучший combo до +1 за худший.",
+    "seasonRule4Title": "Динамика места",
+    "seasonRule4Text": "Первый сезонный матч +5; улучшил прошлое место +10; сохранил +5; ухудшил −20.",
+    "seasonPrizeTitle": "✉ Top 5 → osu!supporter",
+    "seasonPrizeText": "Каждый игрок из топ-5 получает 1 месяц osu!supporter.",
+    "seasonEligibility": "Для сезонного рейтинга лучший osu!standard performance игрока должен быть на карте ниже 6.8★. Если лучший performance — 6.8★ или выше, постоянный рейтинг всё равно остаётся доступным.",
+    "seasonFooter": "Команды: !nss — твой сезон, !nst — топ-5 сезона.",
+    "hostOnlyTitle": "Команды только для текущего host",
+    "hostOnlyText": "!start и !stop принимает только бот от игрока, у которого сейчас host-права.",
+    "skipInfoTitle": "!skip для обычного игрока",
+    "skipInfoText": "Обычный игрок не передаёт host: бот один раз показывает оставшееся время AFK. Сам host использует !skip, чтобы добровольно передать очередь.",
+    "abortInfoTitle": "!abort — только информация",
+    "abortInfoText": "Во время 30-секундного окна загрузки первый !abort показывает, сколько осталось до автоматического abort. Команда сама матч не завершает.",
+    "sectionHost": "Host и очередь",
+    "cmdStartDesc": "Только host. Запускает матч сразу или ставит таймер от 1 до 3600 секунд.",
+    "cmdStopDesc": "Только host. Останавливает автоматический старт и не даёт AFK-таймеру перезапуститься от входа других игроков.",
+    "cmdSkipDesc": "Host добровольно передаёт очередь. Обычный игрок получает одно AFK-уведомление с реальным остатком времени.",
+    "cmdAutoskipDesc": "Убирает тебя из host-очереди; повторная команда возвращает обратно.",
+    "cmdQueueDesc": "Показывает текущую очередь host.",
+    "cmdAbortDesc": "Доступна всем только во время 30-секундного loading-window. Первый вызов сообщает реальный остаток времени; сам матч не останавливает.",
+    "sectionMap": "Карта и матч",
+    "cmdLimitsDesc": "Показывает текущие ограничения лобби на карту.",
+    "cmdTagsDesc": "Показывает user/skill tags текущей карты.",
+    "cmdMirrorsDesc": "Показывает BeatConnect, Nerinyan и Hinamizawa для текущей карты.",
+    "cmdTimeleftDesc": "Показывает расчётное время до конца активного матча.",
+    "sectionScores": "Результаты и профиль",
+    "cmdLatestDesc": "Показывает твой последний score из этого лобби: score, combo, accuracy, misses, PP и mods.",
+    "cmdBestDesc": "Показывает твой лучший osu!standard score на выбранной карте.",
+    "cmdPlaytimeDesc": "Показывает время текущего захода и суммарное время в лобби.",
+    "sectionRanking": "Рейтинги",
+    "cmdNsDesc": "Постоянный Rank, ELO, последнее изменение, матчи, Win Rate и средняя accuracy.",
+    "cmdNtDesc": "Показывает топ-5 постоянного рейтинга.",
+    "cmdNssDesc": "Проверяет сезонный допуск и показывает твой сезонный Rank/ELO.",
+    "cmdNstDesc": "Показывает топ-5 текущего сезона — это места, которые получают osu!supporter.",
+    "copied": "Скопировано: {cmd}"
   },
   "en": {
-    "heroTitle": "[N] | 4.5* - 6.3* | AHR | S1",
-    "heroLead": "A quick and clean command guide for players. Click any command to copy it to your clipboard.",
-    "heroMeta1": "Player commands",
-    "heroMeta2": "RU / EN",
-    "heroMeta3": "Click to copy",
-    "heroCardLabel": "How to use",
-    "heroCardValue": "1 click = copy",
-    "heroCardText": "Pick the command you need, click it, and paste it into lobby chat.",
-    "rankingEyebrow": "Two independent rankings",
+    "heroTitle": "[N] | 4.5* - 6.3* | AHR",
+    "heroLead": "Current lobby commands, permanent and seasonal ELO rules, and rewards. Click a command to copy it.",
+    "heroMeta1": "Host rotation",
+    "heroMeta2": "Permanent + Seasonal ELO",
+    "heroMeta3": "Top 5 rewards",
+    "heroCardLabel": "Season reward",
+    "heroCardText": "The seasonal top 5 each receive 1 month of osu!supporter at the end of the season.",
+    "rankingEyebrow": "Current formula used by the bot",
     "rankingTitle": "How ELO is awarded",
-    "permanentType": "No wipes",
+    "permanentType": "Permanent",
     "permanentTitle": "Permanent ranking",
-    "permanentSummary": "This is your long-term lobby history. It is not reset when the season changes.",
+    "permanentSummary": "Awarded after matches with at least two players and never reset between seasons.",
     "permanentRule1Title": "Score placement",
-    "permanentRule1Text": "From +N for 1st place down to +1 for last place",
-    "permanentRule2Title": "Event bonuses",
-    "permanentRule2Text": "+N from the announced event",
-    "permanentFooter": "Stats: ELO, Last ELO, streaks, matches, Win Rate, and average accuracy",
+    "permanentRule1Text": "With N players: 1st gets +N ELO, 2nd +(N−1), last gets +1.",
+    "permanentRule2Title": "Match result only",
+    "permanentRule2Text": "Accuracy and combo are kept in statistics but do not add separate permanent ELO points.",
+    "permanentFooter": "Commands: !ns — your stats, !nt — permanent top 5.",
     "seasonType": "30 days",
     "seasonTitle": "Season ranking",
-    "seasonSummary": "Season ELO combines match results, playtime, and active event participation. After 30 days the season is archived and a new one starts from zero.",
-    "seasonRule1Title": "Score placement",
-    "seasonRule1Text": "From +N for 1st place down to +1 for last place",
-    "seasonRule2Title": "Event bonuses",
-    "seasonRule2Text": "+1 for the first valid attempt in Math, Guess Number, or Fast Typing. In TeamVs, only the winning team receives the announced +N",
-    "seasonRule3Title": "Accuracy",
-    "seasonRule3Text": "From +N for the highest accuracy among players down to +1 for the lowest",
-    "seasonRule4Title": "Match position",
-    "seasonRule4Text": "Improve your match position to earn +2; getting worse gives -2. Holding your position gives +1",
-    "seasonRule5Title": "Time played",
-    "seasonRule5Text": "Earn +1 for every 5 minutes spent in matches in this lobby",
-    "seasonPrizeTitle": "😎 Top 5 receive osu!supporter",
-    "seasonPrizeText": "One month each at the end of the season.",
-    "seasonEligibility": "To qualify, the bot checks your 2 best osu!standard scores. A score on a 6.80 or harder map excludes you only from the season to preserve balance around the lobby's maximum SR limit. The permanent ranking remains available.",
-    "seasonFooter": "Stats: Season Rank, ELO, and Last ELO",
-    "copied": "Copied: {cmd}",
-    "sectionMain": "Main commands",
-    "cmdNhelpTitle": "!nhelp | !info",
-    "cmdNhelpDesc": "Shows the website link with all available commands.",
-    "cmdQueueTitle": "!queue | !q",
+    "seasonSummary": "A season lasts 30 days. When it ends, the table is archived and the next season starts from zero.",
+    "seasonRule1Title": "Score",
+    "seasonRule1Text": "From +N for 1st place down to +1 for last.",
+    "seasonRule2Title": "Accuracy",
+    "seasonRule2Text": "From +N for the best accuracy down to +1 for the lowest.",
+    "seasonRule3Title": "Combo",
+    "seasonRule3Text": "From +N for the best combo down to +1 for the lowest.",
+    "seasonRule4Title": "Placement trend",
+    "seasonRule4Text": "First seasonal match +5; improve previous placement +10; keep it +5; worsen it −20.",
+    "seasonPrizeTitle": "✉ Top 5 → osu!supporter",
+    "seasonPrizeText": "Every player in the top 5 receives 1 month of osu!supporter.",
+    "seasonEligibility": "To enter the seasonal ranking, the player's best osu!standard performance must be on a map below 6.8★. A best performance at 6.8★ or above does not affect the permanent ranking.",
+    "seasonFooter": "Commands: !nss — your season stats, !nst — seasonal top 5.",
+    "hostOnlyTitle": "Current host only",
+    "hostOnlyText": "!start and !stop are accepted only from the player who currently has host privileges.",
+    "skipInfoTitle": "!skip for a non-host player",
+    "skipInfoText": "A non-host player does not move the queue: the bot shows the remaining AFK time once. The host can use !skip to pass the turn voluntarily.",
+    "abortInfoTitle": "!abort is informational",
+    "abortInfoText": "During the 30-second loading window, the first !abort shows the real time left before automatic abort. The command itself never aborts the match.",
+    "sectionHost": "Host & queue",
+    "cmdStartDesc": "Host only. Starts immediately or sets a countdown from 1 to 3600 seconds.",
+    "cmdStopDesc": "Host only. Stops the automatic start and keeps the AFK pause from being restarted by other players joining.",
+    "cmdSkipDesc": "The host passes the turn voluntarily. A non-host gets one AFK notice with the real remaining time.",
+    "cmdAutoskipDesc": "Removes you from the host queue; use it again to rejoin.",
     "cmdQueueDesc": "Shows the current host queue.",
-    "cmdQueuePositionTitle": "!queueposition | !qp",
-    "cmdQueuePositionDesc": "Shows your position in the queue.",
-    "cmdStartTitle": "!start | !start 10",
-    "cmdStartDesc": "Starts the match. You can set a countdown in seconds or vote for the start.",
-    "cmdStopTitle": "!stop",
-    "cmdStopDesc": "Stops the automatic match start timer.",
-    "cmdAbortTitle": "!abort",
-    "cmdAbortDesc": "Forces the match to stop if it is frozen or not starting.",
-    "cmdSkipTitle": "!skip",
-    "cmdSkipDesc": "Skips your turn or votes to pass host to the next player.",
-    "cmdAutoskipTitle": "!autoskip",
-    "cmdAutoskipDesc": "Turns automatic skipping of your host turn on or off.",
-    "sectionInfo": "Information",
-    "cmdPlaytimeTitle": "!playtime | !pt",
-    "cmdPlaytimeDesc": "Shows your current and total time spent in the lobby.",
-    "cmdMirrorsTitle": "!mirrors | !mr",
-    "cmdMirrorsDesc": "Shows alternative download links for the current map.",
-    "cmdTimeleftTitle": "!timeleft | !tl",
-    "cmdTimeleftDesc": "Shows how much time is left until the match ends.",
-    "cmdMaptagsTitle": "!maptags | !mt",
-    "cmdMaptagsDesc": "Shows user / skill tags for the map.",
-    "sectionScores": "Results",
-    "cmdLastscoreTitle": "!lastscore | !ls",
-    "cmdLastscoreDesc": "Shows your last score played inside the lobby.",
-    "cmdBestscoreTitle": "!bestscore | !bs",
-    "cmdBestscoreDesc": "Shows your best score on the current map.",
-    "sectionRank": "Ranking system",
-    "cmdNstatsTitle": "!nstats | !ns",
-    "cmdNstatsDesc": "Shows Rank, ELO, Last ELO, longest win streak, matches, win rate, and average accuracy.",
-    "cmdNtopTitle": "!ntop | !nt",
-    "cmdNtopDesc": "Shows the top players in the lobby ranking system.",
-    "sectionSeason": "Season ranking S1",
-    "cmdNsstatsTitle": "!nsstats | !nss",
-    "cmdNsstatsDesc": "Shows only your Season rank, ELO, and Last ELO for the current season.",
-    "cmdNstopTitle": "!nstop | !nst",
-    "cmdNstopDesc": "Shows the current season's top five players."
+    "cmdAbortDesc": "Available to everyone only during the 30-second loading window. The first call reports the real remaining time and never aborts by itself.",
+    "sectionMap": "Map & match",
+    "cmdLimitsDesc": "Shows the current lobby map limits.",
+    "cmdTagsDesc": "Shows user/skill tags for the selected map.",
+    "cmdMirrorsDesc": "Shows BeatConnect, Nerinyan and Hinamizawa links for the selected map.",
+    "cmdTimeleftDesc": "Shows the estimated remaining time of the active match.",
+    "sectionScores": "Scores & profile",
+    "cmdLatestDesc": "Shows your latest score from this lobby: score, combo, accuracy, misses, PP and mods.",
+    "cmdBestDesc": "Shows your best osu!standard score on the selected map.",
+    "cmdPlaytimeDesc": "Shows time in the current visit and total time spent in the lobby.",
+    "sectionRanking": "Rankings",
+    "cmdNsDesc": "Permanent Rank, ELO, last change, matches, Win Rate and average accuracy.",
+    "cmdNtDesc": "Shows the permanent top 5.",
+    "cmdNssDesc": "Checks seasonal eligibility and shows your seasonal Rank/ELO.",
+    "cmdNstDesc": "Shows the current seasonal top 5 — these are the rewarded positions.",
+    "copied": "Copied: {cmd}"
   }
 };
 
@@ -168,15 +134,11 @@ let currentLang = 'ru';
 function applyLanguage(lang) {
   currentLang = lang;
   document.documentElement.lang = lang;
-
   document.querySelectorAll('[data-i18n]').forEach((el) => {
     const key = el.dataset.i18n;
     if (translations[lang][key]) el.textContent = translations[lang][key];
   });
-
-  langBtns.forEach((btn) => {
-    btn.classList.toggle('is-active', btn.dataset.langBtn === lang);
-  });
+  langBtns.forEach((btn) => btn.classList.toggle('is-active', btn.dataset.langBtn === lang));
 }
 
 function showToast(message) {
@@ -189,7 +151,6 @@ function showToast(message) {
 async function copyText(text) {
   try {
     await navigator.clipboard.writeText(text);
-    showToast(translations[currentLang].copied.replace('{cmd}', text));
   } catch {
     const ta = document.createElement('textarea');
     ta.value = text;
@@ -199,8 +160,8 @@ async function copyText(text) {
     ta.select();
     document.execCommand('copy');
     ta.remove();
-    showToast(translations[currentLang].copied.replace('{cmd}', text));
   }
+  showToast(translations[currentLang].copied.replace('{cmd}', text));
 }
 
 function applyStagger() {
@@ -209,14 +170,10 @@ function applyStagger() {
   });
 }
 
-langBtns.forEach((btn) => {
-  btn.addEventListener('click', () => applyLanguage(btn.dataset.langBtn));
-});
-
+langBtns.forEach((btn) => btn.addEventListener('click', () => applyLanguage(btn.dataset.langBtn)));
 document.addEventListener('click', (event) => {
   const copyTarget = event.target.closest('[data-copy]');
-  if (!copyTarget) return;
-  copyText(copyTarget.dataset.copy);
+  if (copyTarget) copyText(copyTarget.dataset.copy);
 });
 
 applyLanguage('ru');
