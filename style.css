@@ -215,7 +215,7 @@ h1 {
   text-transform: uppercase;
 }
 .ranking-guide__header h2 {
-  margin: 8px 0 0;
+  margin: 0;
   font-size: clamp(24px, 3.2vw, 40px);
   line-height: 1.05;
   letter-spacing: -.045em;
