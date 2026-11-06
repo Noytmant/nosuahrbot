@@ -1,174 +1,158 @@
-const cards = Array.from(document.querySelectorAll('.ranking-guide, .notice-card, .cmd'));
-const langBtns = Array.from(document.querySelectorAll('[data-lang-btn]'));
-const toast = document.getElementById('toast');
-
-const translations = {
-  "ru": {
-    "heroTitle": "[N] | 4.5* - 6.3* | AHR",
-    "heroLead": "Актуальные команды лобби, правила постоянного и сезонного ELO и награды. Нажми на команду, чтобы скопировать её.",
-    "heroMeta1": "Host rotation",
-    "heroMeta2": "Permanent + Seasonal ELO",
-    "heroMeta3": "Top 5 rewards",
-    "heroCardLabel": "Главный приз сезона",
-    "heroCardText": "Топ-5 сезонного рейтинга получают по 1 месяцу osu!supporter в конце сезона.",
-    "rankingTitle": "Как начисляется ELO",
-    "permanentType": "Постоянный",
-    "permanentTitle": "Обычный рейтинг",
-    "permanentSummary": "Постоянный рейтинг, он не сбрасывается между сезонами.",
-    "permanentRule1Title": "Score",
-    "permanentRule1Text": "От +N за 1 место до +1 за последнее.",
-    "permanentFooter": "Rank, ELO, Matches, Win Rate, Avg Acc. Команда !ns - посмотреть свою статистику, !nt - посмотреть топ 5 игроков.",
-    "seasonType": "30 дней",
-    "seasonTitle": "Сезонный рейтинг",
-    "seasonSummary": "Сезон идёт 30 дней. После завершения таблица архивируется, а новый сезон начинается с нуля.",
-    "seasonRule1Title": "Score",
-    "seasonRule1Text": "От +N за 1 место до +1 за последнее.",
-    "seasonRule2Title": "Accuracy",
-    "seasonRule2Text": "От +N за лучшую accuracy до +1 за худшую.",
-    "seasonRule3Title": "Combo",
-    "seasonRule3Text": "От +N за лучший combo до +1 за худший.",
-    "seasonRule4Title": "Position",
-    "seasonRule4Text": "Улучшение позиции +10; Удержание +5; Ухудшение −20.",
-    "seasonPrizeTitle": "✉ Top 5 → osu!supporter",
-    "seasonPrizeText": "Каждый игрок из топ-5 получает 1 месяц osu!supporter.",
-    "seasonEligibility": "Для сезонного рейтинга лучший osu!standard performance игрока должен быть на карте ниже 6.8★. Если лучший performance — 6.8★ или выше, постоянный рейтинг всё равно остаётся доступным.",
-    "seasonFooter": "Rank, ELO. Команда !nss - посмотреть свою статистику, !nst - посмотреть топ 5 игроков.",
-    "hostOnlyTitle": "Информация",
-    "hostOnlyText": "Команды !start и !stop может использовать только игрок с правами host.",
-    "skipInfoTitle": "Информация",
-    "skipInfoText": "Игрок без host прав может использовать эту команду, чтобы получить информацию о текущем host. Его нельзя пропустить, это будет сделано автоматически по истечению определённого времени. Сам host использует !skip, чтобы добровольно передать очередь.",
-    "abortInfoTitle": "Информация",
-    "abortInfoText": "Во время 30-секундного окна загрузки !abort показывает, сколько осталось до автоматического принудительного завершения матча.",
-    "sectionHost": "Основные команды",
-    "cmdStartDesc": "Запустить матч сразу или указать время в секундах. Например !start 10, матч будет запущен по истечению 10 секунд.",
-    "cmdStopDesc": "Останавливает автоматический старт матча.",
-    "cmdSkipDesc": "Host может добровольно передать свою очередь. Обычный игрок может получить информацию о том, когда host будет пропущен автоматически.",
-    "cmdAutoskipDesc": "Убирает тебя из host очереди. Повторная команда возвращает обратно.",
-    "cmdQueueDesc": "Показывает текущую очередь host.",
-    "cmdAbortDesc": "Вы получите информацию о том, когда матч будет завершён автоматически, если кому-то не удалось загрузится в течении 30 секунд после старта.",
-    "sectionMap": "Матч",
-    "cmdLimitsDesc": "Показывает текущие ограничения лобби на карту.",
-    "cmdTagsDesc": "Показывает user/skill tags текущей карты.",
-    "cmdMirrorsDesc": "Показывает список сайтов, чтобы загрузить карту, если обычные методы не эффективны.",
-    "cmdTimeleftDesc": "Показывает расчётное время до конца активного матча.",
-    "sectionScores": "Результаты",
-    "cmdLatestDesc": "Показывает твой последний score в этом лобби.",
-    "cmdBestDesc": "Показывает твой лучший score на выбранной карте.",
-    "cmdPlaytimeDesc": "Показывает твоё текущее и общее игровое время в этом лобби.",
-    "sectionRanking": "Рейтинг",
-    "cmdNsDesc": "Показывает твою постоянную статистику в этом лобби.",
-    "cmdNtDesc": "Показывает топ 5 игроков постоянного рейтинга.",
-    "cmdNssDesc": "Проверяет сезонный допуск и показывает твой сезонный рейтинг.",
-    "cmdNstDesc": "Показывает топ 5 игроков сезонного рейтинга. Все игроки из топ 5 получают по 1 месяцу osu!supporter в конце сезона.",
-    "copied": "Скопировано: {cmd}"
+const copy = {
+  ru: {
+    eyebrow: 'osu! AHR · игровое лобби', heroTitle: '[N] | 4.5★ – 6.6★ | AHR',
+    heroLead: 'Всё нужное для игры: очередь, рейтинги и команды в одном месте. Сейчас лобби работает между сезонами.',
+    exploreCommands: 'Найти команду', howItWorks: 'Как начисляются очки', navStatus: 'Сезоны', navRules: 'Рейтинг', navCommands: 'Команды',
+    seasonEyebrow: 'СЕЗОНЫ · ПАУЗА', seasonTitle: 'Первый сезон завершён. Скоро S2.',
+    seasonText: 'Спасибо всем, кто участвовал! Результаты S1 сохранены. Второй сезон скоро начнётся. Пока играем без сезонного ELO; обычный рейтинг и анализ навыков продолжают работать.',
+    seasonNext: 'S2 · скоро', rulesEyebrow: 'РЕЙТИНГ', rulesTitle: 'За что начисляются очки',
+    rulesIntro: 'Обычный рейтинг работает сейчас. Сезонные очки вернутся вместе с S2.',
+    regularType: 'ПОСТОЯННЫЙ', regularState: 'РАБОТАЕТ СЕЙЧАС', regularTitle: 'Обычный рейтинг',
+    regularIntro: 'ELO начисляется по месту в матче и не сбрасывается между сезонами.',
+    regularPlaceTitle: 'Место по score', regularPlaceText: 'Если играли 5 человек: первое место получает +5 ELO, последнее +1.',
+    regularStatsTitle: 'Личная статистика', regularStatsText: 'Матчи, средняя accuracy и win rate меняются с каждой игрой.',
+    regularNote: 'Для начисления ELO нужны минимум 2 игрока в матче. Свой рейтинг — !ns, топ-5 — !nt.',
+    seasonType: 'СЕЗОННЫЙ', seasonState: 'S2 СКОРО', seasonRatingTitle: 'Сезонный рейтинг',
+    seasonRatingIntro: 'Второй сезон продлится 30 дней. Очки будут складываться из четырёх частей:',
+    seasonScore: 'От +N за первое место до +1 за последнее.',
+    seasonAcc: 'От +N за лучшую accuracy до +1 за последнюю.',
+    seasonCombo: 'От +N за лучший combo до +1 за последний.',
+    seasonPositionTitle: 'Удержание места', seasonPosition: 'Улучшил место: +10; удержал: +5; опустился: −20.',
+    seasonNote: 'Для допуска карта лучшего результата игрока должна быть ниже 6.8★. ELO начисляется при 2+ игроках в матче. Когда сезон начнётся: !nss и !nst.',
+    seasonPrize: 'Топ-5 сезонного рейтинга получат по месяцу osu!supporter.',
+    commandsEyebrow: 'ШПАРГАЛКА', commandsTitle: 'Команды лобби', commandsIntro: 'Найди нужную команду и нажми, чтобы скопировать её.',
+    searchLabel: 'Поиск команд', searchPlaceholder: 'Поиск команды или действия…', nothingFound: 'Ничего не нашлось. Попробуй другой запрос.',
+    footerText: 'Удачной игры и хороших карт', backToTop: 'Наверх',
+    all: 'Все', match: 'Матч', maps: 'Карты', scores: 'Результаты', ranking: 'Рейтинг', skills: 'Навыки',
+    commandCount: n => `${n} команд`, copyLabel: cmd => `Скопировать ${cmd}`, copied: cmd => `Скопировано: ${cmd}`, copyError: 'Не удалось скопировать. Выдели команду вручную.'
   },
-  "en": {
-    "heroTitle": "[N] | 4.5* - 6.3* | AHR",
-    "heroLead": "Current lobby commands, permanent and seasonal ELO rules, and rewards. Click a command to copy it.",
-    "heroMeta1": "Host rotation",
-    "heroMeta2": "Permanent + Seasonal ELO",
-    "heroMeta3": "Top 5 rewards",
-    "heroCardLabel": "Season reward",
-    "heroCardText": "The seasonal top 5 each receive 1 month of osu!supporter at the end of the season.",
-    "rankingTitle": "How ELO is awarded",
-    "permanentType": "Permanent",
-    "permanentTitle": "Permanent ranking",
-    "permanentSummary": "A permanent ranking that does not reset between seasons.",
-    "permanentRule1Title": "Score",
-    "permanentRule1Text": "From +N for 1st place down to +1 for last place.",
-    "permanentFooter": "Rank, ELO, Matches, Win Rate, Avg Acc. Use !ns to view your statistics and !nt to view the top 5 players.",
-    "seasonType": "30 days",
-    "seasonTitle": "Season ranking",
-    "seasonSummary": "A season lasts 30 days. When it ends, the table is archived and the next season starts from zero.",
-    "seasonRule1Title": "Score",
-    "seasonRule1Text": "From +N for 1st place down to +1 for last.",
-    "seasonRule2Title": "Accuracy",
-    "seasonRule2Text": "From +N for the best accuracy down to +1 for the lowest.",
-    "seasonRule3Title": "Combo",
-    "seasonRule3Text": "From +N for the best combo down to +1 for the lowest.",
-    "seasonRule4Title": "Position",
-    "seasonRule4Text": "Improve your position +10; keep your position +5; drop in position −20.",
-    "seasonPrizeTitle": "✉ Top 5 → osu!supporter",
-    "seasonPrizeText": "Every player in the top 5 receives 1 month of osu!supporter.",
-    "seasonEligibility": "To enter the seasonal ranking, the player's best osu!standard performance must be on a map below 6.8★. A best performance at 6.8★ or above does not affect the permanent ranking.",
-    "seasonFooter": "Rank, ELO. Use !nss to view your statistics and !nst to view the top 5 players.",
-    "hostOnlyTitle": "Information",
-    "hostOnlyText": "The !start and !stop commands can only be used by the player with host privileges.",
-    "skipInfoTitle": "Information",
-    "skipInfoText": "A player without host privileges can use this command to get information about the current host. They cannot skip the host manually; this happens automatically after a certain amount of time. The host can use !skip to pass their turn voluntarily.",
-    "abortInfoTitle": "Information",
-    "abortInfoText": "During the 30-second loading window, !abort shows how much time remains before the match is automatically force-ended.",
-    "sectionHost": "Main commands",
-    "cmdStartDesc": "Start the match immediately or specify a time in seconds. For example, !start 10 starts the match after 10 seconds.",
-    "cmdStopDesc": "Stops the automatic match start.",
-    "cmdSkipDesc": "The host can voluntarily pass their turn. A non-host player can get information about when the host will be skipped automatically.",
-    "cmdAutoskipDesc": "Removes you from the host queue. Use the command again to rejoin it.",
-    "cmdQueueDesc": "Shows the current host queue.",
-    "cmdAbortDesc": "Shows when the match will be ended automatically if someone fails to load within 30 seconds after the match starts.",
-    "sectionMap": "Match",
-    "cmdLimitsDesc": "Shows the current lobby map limits.",
-    "cmdTagsDesc": "Shows user/skill tags for the selected map.",
-    "cmdMirrorsDesc": "Shows a list of websites where you can download the map if the usual methods are not effective.",
-    "cmdTimeleftDesc": "Shows the estimated remaining time of the active match.",
-    "sectionScores": "Results",
-    "cmdLatestDesc": "Shows your latest score in this lobby.",
-    "cmdBestDesc": "Shows your best score on the selected map.",
-    "cmdPlaytimeDesc": "Shows your current and total playtime in this lobby.",
-    "sectionRanking": "Ranking",
-    "cmdNsDesc": "Shows your permanent statistics in this lobby.",
-    "cmdNtDesc": "Shows the top 5 players in the permanent ranking.",
-    "cmdNssDesc": "Checks seasonal eligibility and shows your seasonal ranking.",
-    "cmdNstDesc": "Shows the top 5 players in the seasonal ranking. Every player in the top 5 receives 1 month of osu!supporter at the end of the season.",
-    "copied": "Copied: {cmd}"
+  en: {
+    eyebrow: 'osu! AHR · multiplayer lobby', heroTitle: '[N] | 4.5★ – 6.6★ | AHR',
+    heroLead: 'Queue, rankings and commands in one place. The lobby is currently between seasons.',
+    exploreCommands: 'Browse commands', howItWorks: 'How points work', navStatus: 'Seasons', navRules: 'Ranking', navCommands: 'Commands',
+    seasonEyebrow: 'SEASONS · BREAK', seasonTitle: 'Season 1 is complete. S2 is next.',
+    seasonText: 'Thanks to everyone who played! S1 results are archived. Season 2 is coming soon. Until then, seasonal ELO is paused; permanent ranking and skill analysis continue.',
+    seasonNext: 'S2 · soon', rulesEyebrow: 'RANKING', rulesTitle: 'How points are earned',
+    rulesIntro: 'The permanent ranking is active now. Seasonal points return with S2.',
+    regularType: 'PERMANENT', regularState: 'ACTIVE NOW', regularTitle: 'Permanent ranking',
+    regularIntro: 'ELO is awarded by match placement and never resets between seasons.',
+    regularPlaceTitle: 'Score placement', regularPlaceText: 'With 5 players: first place gets +5 ELO, last place gets +1.',
+    regularStatsTitle: 'Your statistics', regularStatsText: 'Matches, average accuracy and win rate update with every game.',
+    regularNote: 'At least 2 players must take part to earn ELO. Your stats: !ns; top 5: !nt.',
+    seasonType: 'SEASONAL', seasonState: 'S2 COMING SOON', seasonRatingTitle: 'Seasonal ranking',
+    seasonRatingIntro: 'Season 2 will last 30 days. Points come from four parts:',
+    seasonScore: 'From +N for first place to +1 for last.',
+    seasonAcc: 'From +N for best accuracy to +1 for lowest.',
+    seasonCombo: 'From +N for best combo to +1 for lowest.',
+    seasonPositionTitle: 'Holding your place', seasonPosition: 'Improve: +10; hold: +5; drop: −20.',
+    seasonNote: 'Eligibility: the map of your best performance must be below 6.8★. ELO requires 2+ match players. Once S2 begins: !nss and !nst.',
+    seasonPrize: 'The seasonal top 5 each receive one month of osu!supporter.',
+    commandsEyebrow: 'QUICK REFERENCE', commandsTitle: 'Lobby commands', commandsIntro: 'Find a command and tap it to copy.',
+    searchLabel: 'Search commands', searchPlaceholder: 'Search commands or actions…', nothingFound: 'No matches. Try a different search.',
+    footerText: 'Have fun and find good maps', backToTop: 'Back to top',
+    all: 'All', match: 'Match', maps: 'Maps', scores: 'Scores', ranking: 'Ranking', skills: 'Skills',
+    commandCount: n => `${n} commands`, copyLabel: cmd => `Copy ${cmd}`, copied: cmd => `Copied: ${cmd}`, copyError: 'Could not copy. Select the command manually.'
   }
 };
 
-let currentLang = 'ru';
+const commands = [
+  { cat: 'match', cmds: ['!start', '!start 30'], ru: 'Host: начать матч сейчас или через указанное число секунд.', en: 'Host: start now or after the specified seconds.' },
+  { cat: 'match', cmds: ['!stop'], ru: 'Host: приостановить таймер автоматического старта.', en: 'Host: pause the automatic start timer.' },
+  { cat: 'match', cmds: ['!skip', '!s'], ru: 'Host: добровольно передать очередь следующему игроку.', en: 'Host: voluntarily pass the turn to the next player.' },
+  { cat: 'match', cmds: ['!autoskip', '!as'], ru: 'Выйти из host-очереди или вернуться в неё.', en: 'Leave or rejoin the host queue.' },
+  { cat: 'match', cmds: ['!queue', '!q'], ru: 'Посмотреть очередь на выбор карты.', en: 'See the map-pick queue.' },
+  { cat: 'match', cmds: ['!timeleft', '!tl'], ru: 'Узнать оставшееся время текущего матча.', en: 'Check the remaining time in the current match.' },
+  { cat: 'match', cmds: ['!abort'], ru: 'Узнать статус автоматического завершения матча.', en: 'Check the automatic match-abort status.' },
+  { cat: 'maps', cmds: ['!r'], ru: 'Проверить текущие лимиты карт.', en: 'Check the current map limits.' },
+  { cat: 'maps', cmds: ['!usertags', '!ut'], ru: 'Посмотреть теги выбранной карты.', en: 'See the selected map’s tags.' },
+  { cat: 'maps', cmds: ['!mirrors', '!mr'], ru: 'Получить ссылки для загрузки карты.', en: 'Get alternative map download links.' },
+  { cat: 'scores', cmds: ['!latestscore', '!ls'], ru: 'Твой последний результат в этом лобби.', en: 'Your latest result in this lobby.' },
+  { cat: 'scores', cmds: ['!bestscore', '!bs'], ru: 'Твой лучший результат на выбранной карте.', en: 'Your best result on the selected map.' },
+  { cat: 'scores', cmds: ['!playtime', '!pt'], ru: 'Сколько ты играешь сейчас и всего.', en: 'Your current and total time played here.' },
+  { cat: 'ranking', cmds: ['!ns'], ru: 'Твоя статистика постоянного рейтинга.', en: 'Your permanent ranking statistics.' },
+  { cat: 'ranking', cmds: ['!nt'], ru: 'Топ-5 постоянного рейтинга.', en: 'Permanent ranking top 5.' },
+  { cat: 'ranking', cmds: ['!nss'], ru: 'Твоя статистика активного сезона (когда S2 начнётся).', en: 'Your active-season stats (when S2 begins).' },
+  { cat: 'ranking', cmds: ['!nst'], ru: 'Топ-5 активного сезона (когда S2 начнётся).', en: 'Active-season top 5 (when S2 begins).' },
+  { cat: 'skills', cmds: ['!skill', '!sk'], ru: 'Общий профиль механики и стиль игры.', en: 'Your overall mechanics profile and playstyle.' },
+  { cat: 'skills', cmds: ['!skill last', '!skl'], ru: 'Анализ последнего доступного реплея.', en: 'Analysis of your latest available replay.' },
+  { cat: 'skills', cmds: ['!skill trend', '!skt'], ru: 'Как менялись твои навыки в последних играх.', en: 'How your skills have changed across recent plays.' }
+];
 
-function applyLanguage(lang) {
-  currentLang = lang;
-  document.documentElement.lang = lang;
-  document.querySelectorAll('[data-i18n]').forEach((el) => {
-    const key = el.dataset.i18n;
-    if (translations[lang][key]) el.textContent = translations[lang][key];
-  });
-  langBtns.forEach((btn) => btn.classList.toggle('is-active', btn.dataset.langBtn === lang));
-}
+const cats = ['all', 'match', 'maps', 'scores', 'ranking', 'skills'];
+const grid = document.getElementById('command-grid');
+const filters = document.getElementById('command-filters');
+const search = document.getElementById('command-search');
+const toast = document.getElementById('toast');
+let lang = 'ru';
+let activeCat = 'all';
+let toastTimer;
 
-function showToast(message) {
-  toast.textContent = message;
-  toast.classList.add('is-show');
-  clearTimeout(showToast._timer);
-  showToast._timer = setTimeout(() => toast.classList.remove('is-show'), 1400);
-}
-
-async function copyText(text) {
-  try {
-    await navigator.clipboard.writeText(text);
-  } catch {
-    const ta = document.createElement('textarea');
-    ta.value = text;
-    ta.style.position = 'fixed';
-    ta.style.left = '-9999px';
-    document.body.appendChild(ta);
-    ta.select();
-    document.execCommand('copy');
-    ta.remove();
+function renderCommands() {
+  const query = search.value.trim().toLocaleLowerCase();
+  const shown = commands.filter(item => (activeCat === 'all' || item.cat === activeCat) &&
+    (!query || [...item.cmds, item.ru, item.en, copy.ru[item.cat], copy.en[item.cat]].join(' ').toLocaleLowerCase().includes(query)));
+  grid.replaceChildren();
+  for (const item of shown) {
+    const card = document.createElement('article');
+    card.className = 'command-card';
+    const category = document.createElement('span'); category.className = 'command-card__cat'; category.textContent = copy[lang][item.cat];
+    const name = document.createElement('h3'); name.textContent = item.cmds.join('  ·  ');
+    const desc = document.createElement('p'); desc.textContent = item[lang];
+    const buttons = document.createElement('div');
+    buttons.className = item.cmds.length === 1 ? 'command-card__buttons is-single' : 'command-card__buttons';
+    for (const cmd of item.cmds) {
+      const button = document.createElement('button'); button.type = 'button'; button.className = 'copy-command';
+      button.dataset.copy = cmd; button.textContent = cmd;
+      button.setAttribute('aria-label', copy[lang].copyLabel(cmd));
+      buttons.append(button);
+    }
+    card.append(category, name, desc, buttons); grid.append(card);
   }
-  showToast(translations[currentLang].copied.replace('{cmd}', text));
+  document.getElementById('empty-state').hidden = shown.length !== 0;
+  document.getElementById('command-count').textContent = copy[lang].commandCount(shown.length);
 }
-
-function applyStagger() {
-  cards.forEach((card, index) => {
-    card.style.animation = `fadeUp .42s ease ${index * 20}ms both`;
-  });
+function renderFilters() {
+  filters.replaceChildren();
+  for (const cat of cats) {
+    const button = document.createElement('button'); button.type = 'button'; button.textContent = copy[lang][cat];
+    button.className = cat === activeCat ? 'filter is-active' : 'filter'; button.setAttribute('aria-pressed', String(cat === activeCat));
+    button.addEventListener('click', () => { activeCat = cat; renderFilters(); renderCommands(); });
+    filters.append(button);
+  }
 }
-
-langBtns.forEach((btn) => btn.addEventListener('click', () => applyLanguage(btn.dataset.langBtn)));
-document.addEventListener('click', (event) => {
-  const copyTarget = event.target.closest('[data-copy]');
-  if (copyTarget) copyText(copyTarget.dataset.copy);
+function setLanguage(next) {
+  lang = next === 'en' ? 'en' : 'ru';
+  document.documentElement.lang = lang;
+  for (const element of document.querySelectorAll('[data-i18n]')) {
+    const value = copy[lang][element.dataset.i18n];
+    if (value === undefined) continue;
+    element.textContent = value;
+  }
+  for (const element of document.querySelectorAll('[data-i18n-placeholder]')) element.placeholder = copy[lang][element.dataset.i18nPlaceholder];
+  for (const button of document.querySelectorAll('[data-lang]')) button.setAttribute('aria-pressed', String(button.dataset.lang === lang));
+  try { localStorage.setItem('ahr-language', lang); } catch { /* private mode */ }
+  renderFilters(); renderCommands();
+}
+async function copyCommand(value) {
+  try {
+    if (navigator.clipboard?.writeText) await navigator.clipboard.writeText(value);
+    else {
+      const input = document.createElement('textarea'); input.value = value; input.style.position = 'fixed'; input.style.opacity = '0';
+      document.body.append(input); input.select();
+      if (!document.execCommand('copy')) throw new Error('copy failed');
+      input.remove();
+    }
+    toast.textContent = copy[lang].copied(value);
+  } catch { toast.textContent = copy[lang].copyError; }
+  toast.classList.add('is-visible'); clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => toast.classList.remove('is-visible'), 1900);
+}
+for (const button of document.querySelectorAll('[data-lang]')) button.addEventListener('click', () => setLanguage(button.dataset.lang));
+search.addEventListener('input', renderCommands);
+grid.addEventListener('click', event => {
+  const button = event.target.closest('[data-copy]');
+  if (button) copyCommand(button.dataset.copy);
 });
-
-applyLanguage('ru');
-applyStagger();
+let saved = 'ru';
+try { saved = localStorage.getItem('ahr-language') || 'ru'; } catch { /* private mode */ }
+setLanguage(saved);

@@ -1,201 +1,91 @@
 <!doctype html>
 <html lang="ru">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#0b1020" />
-  <meta name="description" content="Commands, ranking rules and seasonal rewards for the osu! AHR lobby." />
-  <title>osu! AHR — Commands & Ranking</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0d1423">
+  <meta name="description" content="osu! AHR: правила лобби, статус сезонов и команды для игроков.">
+  <title>osu! AHR — лобби и команды</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
 </head>
 <body>
-  <main class="page">
-    <section class="hero panel">
-      <div class="hero__copy">
-        <div class="topline">
-          <span class="badge">osu! auto host rotate</span>
-          <div class="lang-switch" aria-label="Language switch">
-            <button class="lang-btn is-active" data-lang-btn="ru" type="button">RU</button>
-            <button class="lang-btn" data-lang-btn="en" type="button">EN</button>
+  <div class="site-shell">
+    <header class="topbar">
+      <nav class="topbar__links" aria-label="Sections">
+        <a href="#status" data-i18n="navStatus">Сезоны</a>
+        <a href="#rules" data-i18n="navRules">Правила</a>
+        <a href="#commands" data-i18n="navCommands">Команды</a>
+      </nav>
+      <div class="lang-switch" role="group" aria-label="Language">
+        <button type="button" data-lang="ru" aria-pressed="true">RU</button>
+        <button type="button" data-lang="en" aria-pressed="false">EN</button>
+      </div>
+    </header>
+
+    <main id="top">
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero__copy">
+          <span class="eyebrow"><span class="live-dot" aria-hidden="true"></span><span data-i18n="eyebrow">osu! AHR · игровое лобби</span></span>
+          <h1 id="hero-title" data-i18n="heroTitle">[N] | 4.5★ – 6.6★ | AHR</h1>
+          <p data-i18n="heroLead">Всё нужное для игры: очередь, рейтинги и команды в одном месте. Сейчас лобби работает между сезонами.</p>
+          <div class="hero__actions">
+            <a class="button button--primary" href="#commands" data-i18n="exploreCommands">Найти команду</a>
+            <a class="button button--quiet" href="#rules" data-i18n="howItWorks">Как начисляются очки</a>
           </div>
         </div>
-        <h1 data-i18n="heroTitle">[N] | 4.5* - 6.3* | AHR</h1>
-        <p class="lead" data-i18n="heroLead">Актуальные команды лобби, правила постоянного и сезонного ELO и награды. Нажми на команду, чтобы скопировать её.</p>
-        <div class="hero__meta">
-          <span class="meta-pill" data-i18n="heroMeta1">Host rotation</span>
-          <span class="meta-pill" data-i18n="heroMeta2">Permanent + Seasonal ELO</span>
-          <span class="meta-pill" data-i18n="heroMeta3">Top 5 rewards</span>
+      </section>
+
+      <section class="season-status" id="status" aria-labelledby="season-title">
+        <div class="season-status__badge" aria-hidden="true">S1</div>
+        <div class="season-status__copy">
+          <span class="eyebrow eyebrow--pink" data-i18n="seasonEyebrow">СЕЗОНЫ · ПАУЗА</span>
+          <h2 id="season-title" data-i18n="seasonTitle">Первый сезон завершён. Скоро S2.</h2>
+          <p data-i18n="seasonText">Спасибо всем, кто участвовал! Результаты S1 сохранены. Второй сезон скоро начнётся. Пока играем без сезонного ELO; обычный рейтинг и анализ навыков продолжают работать.</p>
         </div>
-      </div>
-      <div class="hero__card">
-        <div class="hero__card-label" data-i18n="heroCardLabel">Главный приз сезона</div>
-        <div class="hero__card-value">osu!supporter</div>
-        <p class="hero__card-text" data-i18n="heroCardText">Топ-5 сезонного рейтинга получают по 1 месяцу osu!supporter в конце сезона.</p>
-      </div>
-    </section>
+        <span class="season-status__next" data-i18n="seasonNext">S2 · скоро</span>
+      </section>
 
-    <section class="ranking-guide panel" aria-labelledby="rankingGuideTitle">
-      <div class="ranking-guide__header">
-        <h2 id="rankingGuideTitle" data-i18n="rankingTitle">Как начисляется ELO</h2>
-      </div>
+      <section class="rating-section" id="rules" aria-labelledby="rules-title">
+        <div class="section-heading"><span class="eyebrow" data-i18n="rulesEyebrow">РЕЙТИНГ</span><h2 id="rules-title" data-i18n="rulesTitle">За что начисляются очки</h2><p data-i18n="rulesIntro">Обычный рейтинг работает сейчас. Сезонные очки вернутся вместе с S2.</p></div>
+        <div class="rating-grid">
+          <article class="rating-card rating-card--regular">
+            <div class="rating-card__top"><span class="rating-card__type" data-i18n="regularType">ПОСТОЯННЫЙ</span><span class="rating-card__state" data-i18n="regularState">РАБОТАЕТ СЕЙЧАС</span></div>
+            <h3 data-i18n="regularTitle">Обычный рейтинг</h3>
+            <p class="rating-card__intro" data-i18n="regularIntro">ELO начисляется по месту в матче и не сбрасывается между сезонами.</p>
+            <div class="points-row"><span class="points-row__icon">01</span><div><strong data-i18n="regularPlaceTitle">Место по score</strong><p data-i18n="regularPlaceText">Если играли 5 человек: первое место получает +5 ELO, последнее +1.</p></div></div>
+            <div class="points-row"><span class="points-row__icon">02</span><div><strong data-i18n="regularStatsTitle">Личная статистика</strong><p data-i18n="regularStatsText">Матчи, средняя accuracy и win rate меняются с каждой игрой.</p></div></div>
+            <p class="rating-card__note" data-i18n="regularNote">Для начисления ELO нужны минимум 2 игрока в матче. Свой рейтинг — !ns, топ-5 — !nt.</p>
+          </article>
+          <article class="rating-card rating-card--season">
+            <div class="rating-card__top"><span class="rating-card__type" data-i18n="seasonType">СЕЗОННЫЙ</span><span class="rating-card__state" data-i18n="seasonState">S2 СКОРО</span></div>
+            <h3 data-i18n="seasonRatingTitle">Сезонный рейтинг</h3>
+            <p class="rating-card__intro" data-i18n="seasonRatingIntro">Второй сезон продлится 30 дней. Очки будут складываться из четырёх частей:</p>
+            <div class="points-row"><span class="points-row__icon">01</span><div><strong>Score</strong><p data-i18n="seasonScore">От +N за первое место до +1 за последнее.</p></div></div>
+            <div class="points-row"><span class="points-row__icon">02</span><div><strong>Accuracy</strong><p data-i18n="seasonAcc">От +N за лучшую accuracy до +1 за последнюю.</p></div></div>
+            <div class="points-row"><span class="points-row__icon">03</span><div><strong>Combo</strong><p data-i18n="seasonCombo">От +N за лучший combo до +1 за последний.</p></div></div>
+            <div class="points-row"><span class="points-row__icon">04</span><div><strong data-i18n="seasonPositionTitle">Удержание места</strong><p data-i18n="seasonPosition">Улучшил место: +10; удержал: +5; опустился: −20.</p></div></div>
+            <p class="rating-card__note" data-i18n="seasonNote">Для допуска карта лучшего результата игрока должна быть ниже 6.8★. ELO начисляется при 2+ игроках в матче. Когда сезон начнётся: !nss и !nst.</p>
+            <p class="rating-card__prize" data-i18n="seasonPrize">Топ-5 сезонного рейтинга получат по месяцу osu!supporter.</p>
+          </article>
+        </div>
+      </section>
 
-      <div class="ranking-guide__grid">
-        <article class="rank-guide rank-guide--permanent">
-          <div class="rank-guide__topline">
-            <span class="rank-guide__icon">∞</span>
-            <span class="rank-guide__type" data-i18n="permanentType">Постоянный</span>
-          </div>
-          <h3 data-i18n="permanentTitle">Обычный рейтинг</h3>
-          <p class="rank-guide__summary" data-i18n="permanentSummary">Постоянный рейтинг, он не сбрасывается между сезонами.</p>
-
-          <div class="rank-rule"><span class="rank-rule__number">1</span><div><strong data-i18n="permanentRule1Title">Score</strong><p data-i18n="permanentRule1Text">От +N за 1 место до +1 за последнее.</p></div></div>
-
-          <div class="rank-guide__footer"><span data-i18n="permanentFooter">Rank, ELO, Matches, Win Rate, Avg Acc. Команда !ns - посмотреть свою статистику, !nt - посмотреть топ 5 игроков.</span></div>
-        </article>
-
-        <article class="rank-guide rank-guide--season">
-          <div class="rank-guide__topline">
-            <span class="rank-guide__icon">S</span>
-            <span class="rank-guide__type" data-i18n="seasonType">30 дней</span>
-          </div>
-          <h3 data-i18n="seasonTitle">Сезонный рейтинг</h3>
-          <p class="rank-guide__summary" data-i18n="seasonSummary">Сезон идёт 30 дней. После завершения таблица архивируется, а новый сезон начинается с нуля.</p>
-
-          <div class="season-formula">
-            <div class="rank-rule"><span class="rank-rule__number">1</span><div><strong data-i18n="seasonRule1Title">Score</strong><p data-i18n="seasonRule1Text">От +N за 1 место до +1 за последнее.</p></div></div>
-            <div class="rank-rule"><span class="rank-rule__number">2</span><div><strong data-i18n="seasonRule2Title">Accuracy</strong><p data-i18n="seasonRule2Text">От +N за лучшую accuracy до +1 за худшую.</p></div></div>
-            <div class="rank-rule"><span class="rank-rule__number">3</span><div><strong data-i18n="seasonRule3Title">Combo</strong><p data-i18n="seasonRule3Text">От +N за лучший combo до +1 за худший.</p></div></div>
-            <div class="rank-rule"><span class="rank-rule__number">4</span><div><strong data-i18n="seasonRule4Title">Position</strong><p data-i18n="seasonRule4Text">Улучшение позиции +10; Удержание +5; Ухудшение −20.</p></div></div>
-          </div>
-
-          <div class="season-prize">
-            <strong data-i18n="seasonPrizeTitle">✉ Top 5 → osu!supporter</strong>
-            <span data-i18n="seasonPrizeText">Каждый игрок из топ-5 получает 1 месяц osu!supporter.</span>
-          </div>
-          <p class="eligibility-note" data-i18n="seasonEligibility">Для сезонного рейтинга лучший osu!standard performance игрока должен быть на карте ниже 6.8★. Если лучший performance — 6.8★ или выше, постоянный рейтинг всё равно остаётся доступным.</p>
-          <div class="rank-guide__footer"><span data-i18n="seasonFooter">Rank, ELO. Команда !nss - посмотреть свою статистику, !nst - посмотреть топ 5 игроков.</span></div>
-        </article>
-      </div>
-    </section>
-
-    <section class="notice-grid">
-      <article class="notice-card panel">
-        <span class="notice-card__eyebrow">HOST</span>
-        <h2 data-i18n="hostOnlyTitle">Информация</h2>
-        <p data-i18n="hostOnlyText">Команды !start и !stop может использовать только игрок с правами host.</p>
-      </article>
-      <article class="notice-card panel">
-        <span class="notice-card__eyebrow">AFK</span>
-        <h2 data-i18n="skipInfoTitle">Информация</h2>
-        <p data-i18n="skipInfoText">Игрок без host прав может использовать эту команду, чтобы получить информацию о текущем host. Его нельзя пропустить, это будет сделано автоматически по истечению определённого времени. Сам host использует !skip, чтобы добровольно передать очередь.</p>
-      </article>
-      <article class="notice-card panel">
-        <span class="notice-card__eyebrow">MATCH</span>
-        <h2 data-i18n="abortInfoTitle">Информация</h2>
-        <p data-i18n="abortInfoText">Во время 30-секундного окна загрузки !abort показывает, сколько осталось до автоматического принудительного завершения матча.</p>
-      </article>
-    </section>
-
-    <section class="grid" id="commands" aria-live="polite">
-      <div class="section-title" data-i18n="sectionHost">Основные команды</div>
-
-      <article class="cmd panel">
-        <div class="cmd__head"><div class="cmd__text"><h2>!start | !start 10</h2><p data-i18n="cmdStartDesc">Запустить матч сразу или указать время в секундах. Например !start 10, матч будет запущен по истечению 10 секунд.</p></div></div>
-        <div class="copy-row"><button class="copy-btn copy-btn--alias" type="button" data-copy="!start"><span class="copy-btn__cmd">!start</span></button><button class="copy-btn copy-btn--alias" type="button" data-copy="!start 10"><span class="copy-btn__cmd">!start 10</span></button></div>
-      </article>
-
-      <article class="cmd panel">
-        <div class="cmd__head"><div class="cmd__text"><h2>!stop</h2><p data-i18n="cmdStopDesc">Останавливает автоматический старт матча.</p></div></div>
-        <button class="copy-btn copy-btn--single" type="button" data-copy="!stop"><span class="copy-btn__cmd">!stop</span></button>
-      </article>
-
-      <article class="cmd panel">
-        <div class="cmd__head"><div class="cmd__text"><h2>!skip | !s</h2><p data-i18n="cmdSkipDesc">Host может добровольно передать свою очередь. Обычный игрок может получить информацию о том, когда host будет пропущен автоматически.</p></div></div>
-        <div class="copy-row"><button class="copy-btn copy-btn--alias" type="button" data-copy="!skip"><span class="copy-btn__cmd">!skip</span></button><button class="copy-btn copy-btn--alias" type="button" data-copy="!s"><span class="copy-btn__cmd">!s</span></button></div>
-      </article>
-
-      <article class="cmd panel">
-        <div class="cmd__head"><div class="cmd__text"><h2>!autoskip | !as</h2><p data-i18n="cmdAutoskipDesc">Убирает тебя из host очереди. Повторная команда возвращает обратно.</p></div></div>
-        <div class="copy-row"><button class="copy-btn copy-btn--alias" type="button" data-copy="!autoskip"><span class="copy-btn__cmd">!autoskip</span></button><button class="copy-btn copy-btn--alias" type="button" data-copy="!as"><span class="copy-btn__cmd">!as</span></button></div>
-      </article>
-
-      <article class="cmd panel">
-        <div class="cmd__head"><div class="cmd__text"><h2>!queue | !q</h2><p data-i18n="cmdQueueDesc">Показывает текущую очередь host.</p></div></div>
-        <div class="copy-row"><button class="copy-btn copy-btn--alias" type="button" data-copy="!queue"><span class="copy-btn__cmd">!queue</span></button><button class="copy-btn copy-btn--alias" type="button" data-copy="!q"><span class="copy-btn__cmd">!q</span></button></div>
-      </article>
-
-      <article class="cmd panel">
-        <div class="cmd__head"><div class="cmd__text"><h2>!abort</h2><p data-i18n="cmdAbortDesc">Вы получите информацию о том, когда матч будет завершён автоматически, если кому-то не удалось загрузится в течении 30 секунд после старта.</p></div></div>
-        <button class="copy-btn copy-btn--single" type="button" data-copy="!abort"><span class="copy-btn__cmd">!abort</span></button>
-      </article>
-
-      <div class="section-title" data-i18n="sectionMap">Матч</div>
-
-      <article class="cmd panel">
-        <div class="cmd__head"><div class="cmd__text"><h2>!r</h2><p data-i18n="cmdLimitsDesc">Показывает текущие ограничения лобби на карту.</p></div></div>
-        <button class="copy-btn copy-btn--single" type="button" data-copy="!r"><span class="copy-btn__cmd">!r</span></button>
-      </article>
-
-      <article class="cmd panel">
-        <div class="cmd__head"><div class="cmd__text"><h2>!usertags | !ut</h2><p data-i18n="cmdTagsDesc">Показывает user/skill tags текущей карты.</p></div></div>
-        <div class="copy-row"><button class="copy-btn copy-btn--alias" type="button" data-copy="!usertags"><span class="copy-btn__cmd">!usertags</span></button><button class="copy-btn copy-btn--alias" type="button" data-copy="!ut"><span class="copy-btn__cmd">!ut</span></button></div>
-      </article>
-
-      <article class="cmd panel">
-        <div class="cmd__head"><div class="cmd__text"><h2>!mirrors | !mr</h2><p data-i18n="cmdMirrorsDesc">Показывает список сайтов, чтобы загрузить карту, если обычные методы не эффективны.</p></div></div>
-        <div class="copy-row"><button class="copy-btn copy-btn--alias" type="button" data-copy="!mirrors"><span class="copy-btn__cmd">!mirrors</span></button><button class="copy-btn copy-btn--alias" type="button" data-copy="!mr"><span class="copy-btn__cmd">!mr</span></button></div>
-      </article>
-
-      <article class="cmd panel">
-        <div class="cmd__head"><div class="cmd__text"><h2>!timeleft | !tl</h2><p data-i18n="cmdTimeleftDesc">Показывает расчётное время до конца активного матча.</p></div></div>
-        <div class="copy-row"><button class="copy-btn copy-btn--alias" type="button" data-copy="!timeleft"><span class="copy-btn__cmd">!timeleft</span></button><button class="copy-btn copy-btn--alias" type="button" data-copy="!tl"><span class="copy-btn__cmd">!tl</span></button></div>
-      </article>
-
-      <div class="section-title" data-i18n="sectionScores">Результаты</div>
-
-      <article class="cmd panel">
-        <div class="cmd__head"><div class="cmd__text"><h2>!latestscore | !ls</h2><p data-i18n="cmdLatestDesc">Показывает твой последний score в этом лобби.</p></div></div>
-        <div class="copy-row"><button class="copy-btn copy-btn--alias" type="button" data-copy="!latestscore"><span class="copy-btn__cmd">!latestscore</span></button><button class="copy-btn copy-btn--alias" type="button" data-copy="!ls"><span class="copy-btn__cmd">!ls</span></button></div>
-      </article>
-
-      <article class="cmd panel">
-        <div class="cmd__head"><div class="cmd__text"><h2>!bestscore | !bs</h2><p data-i18n="cmdBestDesc">Показывает твой лучший score на выбранной карте.</p></div></div>
-        <div class="copy-row"><button class="copy-btn copy-btn--alias" type="button" data-copy="!bestscore"><span class="copy-btn__cmd">!bestscore</span></button><button class="copy-btn copy-btn--alias" type="button" data-copy="!bs"><span class="copy-btn__cmd">!bs</span></button></div>
-      </article>
-
-      <article class="cmd panel">
-        <div class="cmd__head"><div class="cmd__text"><h2>!playtime | !pt</h2><p data-i18n="cmdPlaytimeDesc">Показывает твоё текущее и общее игровое время в этом лобби.</p></div></div>
-        <div class="copy-row"><button class="copy-btn copy-btn--alias" type="button" data-copy="!playtime"><span class="copy-btn__cmd">!playtime</span></button><button class="copy-btn copy-btn--alias" type="button" data-copy="!pt"><span class="copy-btn__cmd">!pt</span></button></div>
-      </article>
-
-      <div class="section-title" data-i18n="sectionRanking">Рейтинг</div>
-
-      <article class="cmd panel">
-        <div class="cmd__head"><div class="cmd__text"><h2>!ns</h2><p data-i18n="cmdNsDesc">Показывает твою постоянную статистику в этом лобби.</p></div></div>
-        <button class="copy-btn copy-btn--single" type="button" data-copy="!ns"><span class="copy-btn__cmd">!ns</span></button>
-      </article>
-
-      <article class="cmd panel">
-        <div class="cmd__head"><div class="cmd__text"><h2>!nt</h2><p data-i18n="cmdNtDesc">Показывает топ 5 игроков постоянного рейтинга.</p></div></div>
-        <button class="copy-btn copy-btn--single" type="button" data-copy="!nt"><span class="copy-btn__cmd">!nt</span></button>
-      </article>
-
-      <article class="cmd panel">
-        <div class="cmd__head"><div class="cmd__text"><h2>!nss</h2><p data-i18n="cmdNssDesc">Проверяет сезонный допуск и показывает твой сезонный рейтинг.</p></div></div>
-        <button class="copy-btn copy-btn--single" type="button" data-copy="!nss"><span class="copy-btn__cmd">!nss</span></button>
-      </article>
-
-      <article class="cmd panel">
-        <div class="cmd__head"><div class="cmd__text"><h2>!nst</h2><p data-i18n="cmdNstDesc">Показывает топ 5 игроков сезонного рейтинга. Все игроки из топ 5 получают по 1 месяцу osu!supporter в конце сезона.</p></div></div>
-        <button class="copy-btn copy-btn--single" type="button" data-copy="!nst"><span class="copy-btn__cmd">!nst</span></button>
-      </article>
-    </section>
-  </main>
-
-  <div class="toast" id="toast" role="status" aria-live="polite" aria-atomic="true"></div>
-  <script src="script.js"></script>
+      <section class="command-section" id="commands" aria-labelledby="commands-title">
+        <div class="section-heading section-heading--commands"><div><span class="eyebrow" data-i18n="commandsEyebrow">ШПАРГАЛКА</span><h2 id="commands-title" data-i18n="commandsTitle">Команды лобби</h2><p data-i18n="commandsIntro">Найди нужную команду и нажми, чтобы скопировать её.</p></div><span class="command-count" id="command-count" aria-live="polite"></span></div>
+        <div class="command-tools">
+          <label class="search"><span class="sr-only" data-i18n="searchLabel">Поиск команд</span><input id="command-search" type="search" autocomplete="off" data-i18n-placeholder="searchPlaceholder" placeholder="Поиск команды или действия…"></label>
+          <div class="filters" id="command-filters" role="group" aria-label="Command categories"></div>
+        </div>
+        <div class="command-grid" id="command-grid"></div>
+        <p class="empty-state" id="empty-state" hidden data-i18n="nothingFound">Ничего не нашлось. Попробуй другой запрос.</p>
+      </section>
+    </main>
+    <footer><span>osu! AHR</span><span data-i18n="footerText">Удачной игры и хороших карт</span><a href="#top" data-i18n="backToTop">Наверх</a></footer>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
 </body>
 </html>
